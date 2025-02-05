@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /listings/{id} {
+      allow read: if true; // Temporarily allow all reads
+   
+   
+   
+   
+       // Allow create with data validation
+      allow create: if request.resource.data.keys().hasAll(["title", "description", "price"]) 
+                    && request.resource.data.title is string
+                    && request.resource.data.description is string
+                    && request.resource.data.price is number
+                    && request.resource.data.price > 0;
+
+      // Disable update and delete
+      allow update, delete: if false;
+    }
+  }
+}

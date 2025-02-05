@@ -1,0 +1,57 @@
+/* Mobile-first responsive design */
+@layer base {
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-full mx-auto px-4;
+    max-width: 100%;
+  }
+
+  @screen sm {
+    .container {
+      max-width: 640px;
+    }
+  }
+
+  @screen md {
+    .container {
+      max-width: 768px;
+    }
+  }
+
+  @screen lg {
+    .container {
+      max-width: 1024px;
+    }
+  }
+
+  @screen xl {
+    .container {
+      max-width: 1280px;
+    }
+  }
+}
+
+/* Responsive typography */
+@layer utilities {
+  .text-responsive {
+    @apply text-base;
+  }
+
+  @screen md {
+    .text-responsive {
+      @apply text-lg;
+    }
+  }
+
+  @screen lg {
+    .text-responsive {
+      @apply text-xl;
+    }
+  }
+}
