@@ -1,19 +1,42 @@
-sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
-sitemap_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+from datetime import datetime
+
+urls = [
+    {"loc": "https://www.thedesignrefuge.com/", "changefreq": "daily", "priority": "1.0"},
+    {"loc": "https://www.thedesignrefuge.com/designers", "changefreq": "daily", "priority": "0.9"},
+    {"loc": "https://www.thedesignrefuge.com/design-styles", "changefreq": "weekly", "priority": "0.8"},
+    {"loc": "https://www.thedesignrefuge.com/project-gallery", "changefreq": "weekly", "priority": "0.8"},
+    {"loc": "https://www.thedesignrefuge.com/resources/tips", "changefreq": "weekly", "priority": "0.7"},
+    {"loc": "https://www.thedesignrefuge.com/budget-design", "changefreq": "monthly", "priority": "0.7"},
+    {"loc": "https://www.thedesignrefuge.com/resources/diy", "changefreq": "weekly", "priority": "0.7"},
+    {"loc": "https://www.thedesignrefuge.com/resources/blog", "changefreq": "weekly", "priority": "0.6"},
+    {"loc": "https://www.thedesignrefuge.com/contact", "changefreq": "monthly", "priority": "0.5"},
+    {"loc": "https://www.thedesignrefuge.com/about", "changefreq": "yearly", "priority": "0.5"},
+    {"loc": "https://www.thedesignrefuge.com/for-designers", "changefreq": "monthly", "priority": "0.7"},
+    {"loc": "https://www.thedesignrefuge.com/resources/templates", "changefreq": "monthly", "priority": "0.6"},
+    {"loc": "https://www.thedesignrefuge.com/profit-calculator", "changefreq": "monthly", "priority": "0.6"},
+    {"loc": "https://www.thedesignrefuge.com/resources/growth-strategies", "changefreq": "monthly", "priority": "0.7"},
+]
+
+lastmod = datetime.utcnow().strftime("%Y-%m-%d")
+
+sitemap_content = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+"""
 
 for url in urls:
-    sitemap_content += f"  <url>\n"
-    sitemap_content += f"    <loc>{url['loc']}</loc>\n"
-    sitemap_content += f"    <lastmod>{lastmod}</lastmod>\n"
-    sitemap_content += f"    <changefreq>{url['changefreq']}</changefreq>\n"
-    sitemap_content += f"    <priority>{url['priority']}</priority>\n"
-    sitemap_content += f"  </url>\n"
+    sitemap_content += f"""
+    <url>
+        <loc>{url['loc']}</loc>
+        <lastmod>{lastmod}</lastmod>
+        <changefreq>{url['changefreq']}</changefreq>
+        <priority>{url['priority']}</priority>
+    </url>
+    """
 
-sitemap_content += '</urlset>'
+sitemap_content += """
+</urlset>
+"""
 
-# Save to file ensuring UTF-8 without BOM
-file_path = '/mnt/data/sitemap_corrected.xml'
-with open(file_path, 'w', encoding='utf-8') as file:
-    file.write(sitemap_content)
-
-file_path
+# Save to file (using a more flexible approach)
+with open("sitemap.xml", "w") as file:
+    file.write(sitemap_content) 
