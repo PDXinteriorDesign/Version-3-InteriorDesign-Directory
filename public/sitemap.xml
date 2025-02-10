@@ -1,6 +1,6 @@
 from datetime import datetime
 
-# List of URLs with best SEO practices for priority and change frequency
+# List of URLs with best SEO practices for priority and change frequency version 2
 urls = [
     {"loc": "https://www.thedesignrefuge.com/", "changefreq": "daily", "priority": "1.0"},
     {"loc": "https://www.thedesignrefuge.com/designers", "changefreq": "daily", "priority": "0.9"},
