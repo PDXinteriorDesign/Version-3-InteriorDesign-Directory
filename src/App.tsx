@@ -1,23 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoutes } from './routes';
-import { approvePendingListings } from './lib/firebase/listings';
 
 const App: React.FC = () => {
-  useEffect(() => {
-    const autoApproveListings = async () => {
-      try {
-        console.log("Checking and approving pending listings...");
-        await approvePendingListings();
-        console.log("Pending listings approved successfully.");
-      } catch (error) {
-        console.error("Error auto-approving pending listings:", error);
-      }
-    };
-
-    autoApproveListings();
-  }, []);
 
   return (
     <HelmetProvider>

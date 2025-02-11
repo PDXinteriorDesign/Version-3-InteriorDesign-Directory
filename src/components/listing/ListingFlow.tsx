@@ -21,7 +21,8 @@ export const ListingFlow: React.FC = () => {
       phone: '',
       website: '',
       company: '',
-      location: '',
+      city: '',
+      state: '',
     },
     portfolio: {
       description: '',
@@ -46,14 +47,16 @@ export const ListingFlow: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const listingId = await createListing(formData);
-      
+      console.log("Form Data:", formData);
+
+
       // Redirect to success page
-      navigate('/list-with-us/success', { 
-        state: { 
+      navigate('/list-with-us/success', {
+        state: {
           listingId,
-          businessName: formData.businessInfo.company 
+          businessName: formData.businessInfo.company
         }
       });
     } catch (err) {
@@ -81,13 +84,13 @@ export const ListingFlow: React.FC = () => {
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
       <div className="p-8">
         <ProgressBar currentStep={step} totalSteps={steps.length} steps={steps} />
-        
+
         {error && (
           <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg">
             {error}
           </div>
         )}
-        
+
         <div className="mt-8">
           <CurrentStep
             formData={formData}

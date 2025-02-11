@@ -15,10 +15,19 @@ export const BusinessInfoStep: React.FC<BusinessInfoStepProps> = ({
   onPrev
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateFormData('businessInfo', {
-      ...formData.businessInfo,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+
+    if (name === "city" || name === "state") {
+      updateFormData("businessLocation", {
+        ...formData.businessLocation,
+        [name]: value,
+      });
+    } else {
+      updateFormData("businessInfo", {
+        ...formData.businessInfo,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -124,7 +133,7 @@ export const BusinessInfoStep: React.FC<BusinessInfoStepProps> = ({
               type="text"
               name="city"
               required
-              value={formData.businessInfo.city}
+              value={formData.businessLocation?.city || ''}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
             />
@@ -137,7 +146,7 @@ export const BusinessInfoStep: React.FC<BusinessInfoStepProps> = ({
               type="text"
               name="state"
               required
-              value={formData.businessInfo.state}
+              value={formData.businessLocation?.state}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
             />

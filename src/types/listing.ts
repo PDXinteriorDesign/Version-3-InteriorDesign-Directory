@@ -5,8 +5,7 @@ export interface BusinessInfo {
   experience?: string;
   website: string;
   company: string;
-  city: string;
-  state: string;
+  
 }
 
 export interface Portfolio {
@@ -20,9 +19,15 @@ export interface Services {
   areas: string[];
   priceRange: string;
 }
+export interface BusinessLocation {
+  city: string;
+  state: string;
+  
+}
 
 export interface ListingData {
   businessInfo: BusinessInfo;
   portfolio: Portfolio;
   services: Services;
+  businessLocation: BusinessLocation;
 }

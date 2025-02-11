@@ -5,7 +5,6 @@ import {
   query,
   where,
   orderBy,
-  writeBatch,
   QueryConstraint,
 } from "firebase/firestore";
 import { db } from "./config";
@@ -32,7 +31,7 @@ export const createListing = async (data: ListingData): Promise<string> => {
   try {
     const docRef = await addDoc(collection(db, LISTINGS_COLLECTION), {
       ...data,
-      status: "approved", // Default status
+      status: "pending", // Default status
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
@@ -117,31 +116,3 @@ export const getListings = async (
   }
 };
 
-export const approvePendingListings = async (): Promise<void> => {
-  try {
-    const listingsRef = collection(db, "listings");
-    const q = query(listingsRef, where("status", "==", "pending"));
-    const snapshot = await getDocs(q);
-
-    console.log("Pending listings count:", snapshot.size);
-
-    if (snapshot.empty) {
-      console.log("No pending listings to approve.");
-      return;
-    }
-
-    const batch = writeBatch(db);
-    snapshot.forEach((doc) => {
-      console.log("Updating document ID:", doc.id);
-      batch.update(doc.ref, {
-        status: "approved",
-        updatedAt: new Date().toISOString(),
-      });
-    });
-
-    await batch.commit();
-    console.log("All pending listings approved.");
-  } catch (error) {
-    console.error("Error approving pending listings:", error);
-  }
-};

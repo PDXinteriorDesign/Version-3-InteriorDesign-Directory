@@ -12,6 +12,12 @@ interface DesignerCardProps {
 export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
   const mainStyle = designer.specialty[0];
   const styleColor = getStyleColor(mainStyle);
+  console.log("Designer data:", {
+    name: designer.name,
+    businessLocation: designer.businessLocation,
+    fullDesigner: designer
+  });
+
 
 
 
@@ -61,7 +67,9 @@ export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-between">
-            <span className="text-gray-900 font-medium">{designer.location}</span>
+            <span className="text-gray-900 font-medium">
+              {designer.businessLocation?.city}, {designer.businessLocation?.state}
+            </span>
             <span className={`text-sm font-medium ${styleColor.text}`}>{designer.priceRange}</span>
           </div>
         </div>

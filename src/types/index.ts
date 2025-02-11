@@ -10,7 +10,10 @@ export interface Designer {
   profileImage: string;
   coverImage: string;
   portfolioImages: string[];
-  location: string;
+  businessLocation: {
+    city: string;
+    state: string;
+  };
   coordinates?: {
     lat: number;
     lng: number;
