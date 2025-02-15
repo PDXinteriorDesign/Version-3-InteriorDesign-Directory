@@ -37,5 +37,7 @@ export interface Location {
   metaDescription: string;
   popularDesignStyles: string[];
   averageCost: string;
-  cities: City[];
+  name: string;  // Ensure this exists
+  slug: string;
+  cities: { name: string; slug: string; description?: string }[];
 }

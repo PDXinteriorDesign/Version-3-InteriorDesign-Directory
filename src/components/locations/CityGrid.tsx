@@ -16,7 +16,7 @@ export const CityGrid: React.FC<CityGridProps> = ({ cities, stateSlug }) => {
         {cities.map((city) => (
           <Link
             key={city.slug}
-            to={`/location/${stateSlug}/${city.slug}`}
+            to={`/locations/${state.slug}/${city.slug}`}
             className="group"
           >
             <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">

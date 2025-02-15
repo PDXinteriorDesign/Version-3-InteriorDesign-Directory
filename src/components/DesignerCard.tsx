@@ -12,17 +12,14 @@ interface DesignerCardProps {
 export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
   const mainStyle = designer.specialty[0];
   const styleColor = getStyleColor(mainStyle);
-  console.log("Designer data:", {
-    name: designer.name,
-    businessLocation: designer.businessLocation,
-    fullDesigner: designer
-  });
+  console.log("DesignerCard data:", JSON.stringify(designer, null, 2));
+
 
 
 
 
   return (
-    <Link to={`/designer/${designer.id}`} className="block group">
+    <Link to={`/designers/${designer.id}`} className="block group">
 
       <div className={`bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border-t-4 ${styleColor.border}`}>
         <div className="relative h-64">
@@ -68,8 +65,9 @@ export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="text-gray-900 font-medium">
-              {designer.businessLocation?.city}, {designer.businessLocation?.state}
+              {designer.location}
             </span>
+
             <span className={`text-sm font-medium ${styleColor.text}`}>{designer.priceRange}</span>
           </div>
         </div>

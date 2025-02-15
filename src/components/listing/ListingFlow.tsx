@@ -21,6 +21,8 @@ export const ListingFlow: React.FC = () => {
       phone: '',
       website: '',
       company: '',
+    },
+    businessLocation: { // Add this
       city: '',
       state: '',
     },
@@ -35,6 +37,7 @@ export const ListingFlow: React.FC = () => {
       priceRange: '',
     }
   });
+
 
   const updateFormData = (section: keyof ListingData, data: any) => {
     setFormData(prev => ({

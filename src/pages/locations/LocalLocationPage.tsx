@@ -11,12 +11,12 @@ import { designers } from '../../data/designers';
 export const LocalLocationPage: React.FC = () => {
   const { city } = useParams<{ city: string }>();
   const content = locationContent[city?.toLowerCase() || ''];
-  
+
   if (!content) {
-    return <div>Location not found</div>;
+    return <div>local Location not found</div>;
   }
 
-  const localDesigners = designers.filter(d => 
+  const localDesigners = designers.filter(d =>
     d.location.toLowerCase().includes(city?.toLowerCase() || '')
   );
 
@@ -38,7 +38,7 @@ export const LocalLocationPage: React.FC = () => {
               {content.intro}
             </p>
             <div className="max-w-2xl">
-              <SearchBar onSearch={() => {}} />
+              <SearchBar onSearch={() => { }} />
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ interface DesignerProfileProps {
 
 
 export const DesignerProfile: React.FC<DesignerProfileProps> = ({ designer }) => {
-  const { id } = useParams<{ id: string }>();
+  useParams<{ id: string }>();
 
 
 
@@ -64,12 +64,13 @@ export const DesignerProfile: React.FC<DesignerProfileProps> = ({ designer }) =>
             <p className="text-gray-700 mb-6 leading-relaxed">{designer.portfolio.description}</p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
-              {designer.businessInfo.location && (
+              {designer.businessLocation.city && designer.businessLocation.state && (
                 <div className="flex items-center">
                   <MapPin className="w-5 h-5 text-gray-500 mr-2" />
-                  <span>{designer.businessInfo.location}</span>
+                  <span>{designer.businessLocation.city}, {designer.businessLocation.state}</span>
                 </div>
               )}
+
 
               <div className="flex items-center">
                 <Clock className="w-5 h-5 text-gray-500 mr-2" />

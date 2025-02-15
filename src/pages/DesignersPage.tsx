@@ -31,7 +31,7 @@ export const DesignersPage: React.FC = () => {
     profileImage: listing.portfolio.images[0] || '/placeholder-profile.jpg',
     coverImage: listing.portfolio.images[1] || '/placeholder-cover.jpg',
     portfolioImages: listing.portfolio.images,
-    location: listing.businessInfo.location,
+    location: `${listing.businessLocation.city}, ${listing.businessLocation.state}`,
     experience: 1,
     contact: {
       phone: listing.businessInfo.phone,
@@ -51,10 +51,10 @@ export const DesignersPage: React.FC = () => {
     if (designer.source !== 'firebase') return false;
 
     // Filter by location
-    if (filters.state && !designer.location.toLowerCase().includes(filters.state.toLowerCase())) {
+    if (filters.state && (!designer.location || !designer.location.toLowerCase().includes(filters.state.toLowerCase()))) {
       return false;
     }
-    if (filters.city && !designer.location.toLowerCase().includes(filters.city.toLowerCase())) {
+    if (filters.city && (!designer.location || !designer.location.toLowerCase().includes(filters.city.toLowerCase()))) {
       return false;
     }
 
@@ -64,7 +64,7 @@ export const DesignersPage: React.FC = () => {
     }
 
     // Filter by design styles
-    if (filters.styles.length > 0 && !filters.styles.some(style => 
+    if (filters.styles.length > 0 && !filters.styles.some(style =>
       designer.specialty.includes(style)
     )) {
       return false;

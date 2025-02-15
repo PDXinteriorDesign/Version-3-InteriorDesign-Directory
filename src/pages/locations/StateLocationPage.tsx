@@ -12,13 +12,27 @@ import { designers } from '../../data/designers';
 
 export const StateLocationPage: React.FC = () => {
   const { state } = useParams<{ state: string }>();
-  const location = getLocationBySlug(state || '');
-  const stateDesigners = designers.filter(d => 
-    d.location.toLowerCase().includes(location?.state.toLowerCase() || '')
-  );
+
+  // Ensure location exists
+  const location = state ? getLocationBySlug(state) : undefined;
+
+  // Ensure designers have businessLocation before filtering
+  const stateDesigners = location
+    ? designers.filter(d =>
+      d.businessLocation &&
+      d.businessLocation.state.toLowerCase() === location.state.toLowerCase()
+    )
+    : [];
 
   if (!location) {
-    return <div>Location not found</div>;
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <h1 className="text-2xl font-bold">State Location not found</h1>
+        </div>
+      </div>
+    );
   }
 
   const schema = generateLocationSchema(location);

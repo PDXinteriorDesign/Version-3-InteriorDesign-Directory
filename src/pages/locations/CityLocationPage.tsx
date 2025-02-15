@@ -16,17 +16,22 @@ export const CityLocationPage: React.FC = () => {
   const { state, city } = useParams<{ state: string; city: string }>();
   const location = getLocationBySlug(state || '');
   const cityData = getCityBySlug(state || '', city || '');
-  
-  const cityDesigners = designers.filter(d => 
-    d.location.toLowerCase().includes(cityData?.name.toLowerCase() || '')
-  );
+
+  const cityDesigners = cityData
+    ? designers.filter(d =>
+      d.businessLocation &&
+      d.businessLocation.city.toLowerCase() === cityData.name.toLowerCase()
+    )
+    : [];
+
+
 
   if (!location || !cityData) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <h1 className="text-2xl font-bold">Location not found</h1>
+          <h1 className="text-2xl font-bold">City Location not found</h1>
         </div>
         <Footer />
       </div>
@@ -49,22 +54,22 @@ export const CityLocationPage: React.FC = () => {
 
       <main>
         <CityHeader city={cityData} state={location} />
-        
+
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-16">
           <DesignerGrid designers={cityDesigners} />
-          
+
           {'content' in cityData && (
             <CityGuide content={cityData.content} />
           )}
-          
-          <NeighborhoodSection 
-            neighborhoods={cityData.neighborhoods} 
-            cityName={cityData.name} 
+
+          <NeighborhoodSection
+            neighborhoods={cityData.neighborhoods}
+            cityName={cityData.name}
           />
-          
-          <CityFAQ 
-            city={cityData.name} 
-            state={location.state} 
+
+          <CityFAQ
+            city={cityData.name}
+            state={location.state}
           />
         </div>
       </main>

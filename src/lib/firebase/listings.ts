@@ -1,7 +1,9 @@
 import {
   collection,
   addDoc,
+  doc,
   getDocs,
+  getDoc,
   query,
   where,
   orderBy,
@@ -9,16 +11,20 @@ import {
 } from "firebase/firestore";
 import { db } from "./config";
 
-// Define the structure of a listing document
 export interface ListingData {
   id?: string; // Firestore document ID (optional on creation)
   status: string;
   businessInfo?: {
-    location: string;
+    location?: string;
+  };
+  businessLocation?: {
+    city?: string;
+    state?: string;
   };
   createdAt: string;
   updatedAt: string;
 }
+
 
 const LISTINGS_COLLECTION = "listings";
 
@@ -43,6 +49,29 @@ export const createListing = async (data: ListingData): Promise<string> => {
 };
 
 /**
+ * Fetches a single listing from Firestore by ID.
+ * @param {string} id - The ID of the listing.
+ * @returns {Promise<ListingData | null>} The listing data or null if not found.
+ */
+export const getListingById = async (id: string): Promise<ListingData | null> => {
+  try {
+    const docRef = doc(db, "listings", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("✅ Document found:", docSnap.data());
+      return { id: docSnap.id, ...docSnap.data() } as ListingData;
+    } else {
+      console.log("❌ Document does NOT exist for ID:", id);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching listing by ID:", error);
+    return null;
+  }
+};
+
+/**
  * Fetches listings from Firestore with optional filters.
  * @param {Object} filters - Filters for the query.
  * @param {string} [filters.status] - Filter by status.
@@ -50,23 +79,24 @@ export const createListing = async (data: ListingData): Promise<string> => {
  * @returns {Promise<ListingData[]>} An array of listings.
  */
 export const getListings = async (
-  filters?: { status?: string; location?: string }
+  filters?: { status?: string; city?: string; state?: string }
 ): Promise<ListingData[]> => {
+  console.log("🚀 getListings CALLED with filters:", filters);
   try {
     const constraints: QueryConstraint[] = [];
     const listingsRef = collection(db, LISTINGS_COLLECTION);
 
     // Apply filters
     if (filters?.status) {
-      if (Array.isArray(filters.status)) {
-        constraints.push(where("status", "in", filters.status));
-      } else {
-        constraints.push(where("status", "==", filters.status));
-      }
+      constraints.push(where("status", "==", filters.status));
     }
-    console.log("Filters oh filter please:", filters); 
-    if (filters?.location) {
-      constraints.push(where("businessInfo.location", "==", filters.location));
+
+    if (filters?.city) {
+      constraints.push(where("businessLocation.city", "==", filters.city));
+    }
+
+    if (filters?.state) {
+      constraints.push(where("businessLocation.state", "==", filters.state));
     }
 
     // Add default ordering
@@ -77,28 +107,28 @@ export const getListings = async (
 
     // Execute the query
     const snapshot = await getDocs(q);
-    console.log("Fetched Documents:", snapshot.docs.map((doc) => doc.data()));
+    console.log(`🔥 Query executed, ${snapshot.docs.length} documents fetched`);
 
+    snapshot.docs.forEach((doc) => {
+      console.log(`📄 Document ID: ${doc.id}`, JSON.stringify(doc.data(), null, 2));
+    });
 
-    // Map Firestore documents to ListingData objects
     return snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     } as ListingData));
   } catch (error: any) {
+    console.error("🔥 ERROR fetching listings:", error);
+
     if (error.code === "failed-precondition") {
-      console.error(
-        "Composite index required. Visit this link to create it:",
-        error.message
-      );
+      console.error("⚠️ Composite index required:", error.message);
     } else if (error.code === "permission-denied") {
-      console.error("Permission denied. Check your Firestore rules:", error.message);
+      console.error("🚫 Permission denied:", error.message);
     } else {
-      console.error("Error fetching listings:", error.message);
+      console.error("❌ Unexpected error:", error.message);
     }
 
-    // Fallback logic: Fetch all and filter locally
-    console.warn("Fallback: Fetching all listings and filtering locally.");
+    console.warn("⚠️ Fallback: Fetching all listings and filtering locally.");
     try {
       const snapshot = await getDocs(collection(db, LISTINGS_COLLECTION));
       return snapshot.docs
@@ -106,13 +136,13 @@ export const getListings = async (
         .filter(
           (doc) =>
             (!filters?.status || doc.status === filters.status) &&
-            (!filters?.location || doc.businessInfo?.location === filters.location)
+            (!filters?.city || doc.businessLocation?.city === filters.city) &&
+            (!filters?.state || doc.businessLocation?.state === filters.state)
         )
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     } catch (fallbackError) {
-      console.error("Fallback also failed:", fallbackError);
+      console.error("🔥 Fallback also failed:", fallbackError);
       throw fallbackError;
     }
   }
 };
-

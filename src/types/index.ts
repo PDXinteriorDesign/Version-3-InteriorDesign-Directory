@@ -14,6 +14,7 @@ export interface Designer {
     city: string;
     state: string;
   };
+  location?: string; 
   coordinates?: {
     lat: number;
     lng: number;
@@ -28,6 +29,8 @@ export interface Designer {
   priceRange: string;
   source?: string;
 }
+
+
 
 export interface SearchFilters {
   location?: string;

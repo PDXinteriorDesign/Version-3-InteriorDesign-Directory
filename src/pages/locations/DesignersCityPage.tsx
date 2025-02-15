@@ -11,14 +11,14 @@ export const DesignersCityPage: React.FC = () => {
   const { state, city } = useParams<{ state: string; city: string }>();
   const location = getLocationBySlug(state || '');
   const cityData = getCityBySlug(state || '', city || '');
-  
+
   const { designers, loading, error } = useDesignerSearch({
     state: location?.name,
     city: cityData?.name
   });
 
   if (!location || !cityData) {
-    return <div>Location not found</div>;
+    return <div>city Location not found</div>;
   }
 
   return (
@@ -68,8 +68,8 @@ export const DesignersCityPage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {designers.map((designer) => (
-              <DesignerCard 
-                key={designer.id} 
+              <DesignerCard
+                key={designer.id}
                 designer={designer}
                 href={`/designers/${location.slug}/${cityData.slug}/${designer.slug}`}
               />

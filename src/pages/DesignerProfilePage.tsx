@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../lib/firebase/config';
-import { DesignerProfile } from '../components/DesignerProfile';
-import { Navbar } from '../components/Navbar';
-import { SEOHead } from '../components/SEOHead';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../lib/firebase/config";
+import { DesignerProfile } from "../components/DesignerProfile";
+import { Navbar } from "../components/Navbar";
+import { SEOHead } from "../components/SEOHead";
 
 export const DesignerProfilePage: React.FC = () => {
+
+
+
   const { id } = useParams<{ id: string }>();
   const [designer, setDesigner] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +17,10 @@ export const DesignerProfilePage: React.FC = () => {
 
   useEffect(() => {
     const fetchDesigner = async () => {
+      console.log(`Fetching designer with ID: ${id}`); // Debugging line
+
       if (!id) {
+        console.error('Invalid designer ID');
         setError('Invalid designer ID');
         setLoading(false);
         return;
@@ -22,11 +28,14 @@ export const DesignerProfilePage: React.FC = () => {
 
       try {
         const docRef = doc(db, 'listings', id);
+        console.log("Fetching document from Firestore:", docRef.path); // Debugging line
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+          console.log("Designer found:", docSnap.data()); // Debugging line
           setDesigner(docSnap.data());
         } else {
+          console.error('Designer not found');
           setError('Designer not found');
         }
       } catch (err) {
@@ -39,8 +48,15 @@ export const DesignerProfilePage: React.FC = () => {
 
     fetchDesigner();
   }, [id]);
+
+
   if (loading) {
-    return;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Navbar />
+        <p className="text-gray-700 text-lg">Loading...</p>
+      </div>
+    );
   }
 
   if (error) {
@@ -66,7 +82,7 @@ export const DesignerProfilePage: React.FC = () => {
   const schema = designer && {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": designer.name,
+    "name": designer.businessInfo?.name,
     "jobTitle": "Interior Designer",
     "worksFor": { "@type": "Organization", "name": designer.businessInfo?.company },
     "email": designer.businessInfo?.email,
@@ -77,10 +93,11 @@ export const DesignerProfilePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title={`${designer.name} - Interior Designer | The Design Refuge`}
-        description={`${designer.name} is a professional interior designer at ${designer.businessInfo?.company}. View portfolio, services, and contact information.`}
+        title={`${designer.businessInfo?.name || "Designer Profile"} - Interior Designer | The Design Refuge`}
+        description={`${designer.businessInfo?.name || "This"} is a professional interior designer at ${designer.businessInfo?.company || "an interior design company"}. View portfolio, services, and contact information.`}
         schema={schema}
       />
+
 
       <Navbar />
 

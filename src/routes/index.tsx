@@ -5,7 +5,7 @@ import { ContactPage } from '../pages/ContactPage';
 import { DesignerResourcesPage } from '../pages/DesignerResourcesPage';
 import { DesignersStatePage } from '../pages/locations/DesignersStatePage';
 import { DesignersCityPage } from '../pages/locations/DesignersCityPage';
-import { DesignerProfilePage } from '../pages/locations/DesignerProfilePage';
+import { DesignerProfilePage } from '../pages/DesignerProfilePage';
 import { ComingSoonPage } from '../pages/ComingSoonPage';
 import { ProfitCalculatorPage } from '../pages/ProfitCalculatorPage';
 import { GrowthStrategiesPage } from '../pages/GrowthStrategiesPage';
@@ -52,7 +52,8 @@ export const AppRoutes = [
   { path: '/resources/tips', element: <DesignTipsPage /> },
   { path: '/resources/diy', element: <DIYProjectsPage /> },
   { path: '/resources/blog', element: <DesignBlogPage /> },
+  { path: '/designers/:id', element: <DesignerProfilePage /> },
   { path: '/designers/:state', element: <DesignersStatePage /> },
   { path: '/designers/:state/:city', element: <DesignersCityPage /> },
-  { path: '/designers/:state/:city/:designerSlug', element: <DesignerProfilePage /> }
+
 ];
