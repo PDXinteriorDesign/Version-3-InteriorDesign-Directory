@@ -35,7 +35,8 @@ export const HeroSection: React.FC = () => {
         </div>
 
         <div className="max-w-2xl mx-auto mb-12">
-          <SearchBar onSearch={() => {}} />
+          <SearchBar onSearch={() => { }}
+          />
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">

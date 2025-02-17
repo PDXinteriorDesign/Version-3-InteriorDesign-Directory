@@ -48,6 +48,95 @@ export const createListing = async (data: ListingData): Promise<string> => {
   }
 };
 
+
+
+
+
+/**
+ * Fetch designers based on location (state/city) and convert to coordinates
+ * @param {Object} filters - Search filters for listings.
+ * @param {string} [filters.city] - Filter by city.
+ * @param {string} [filters.state] - Filter by state.
+ * @returns {Promise<ListingData[]>} An array of designers.
+ */
+export const getDesignersByLocation = async (filters?: { city?: string; state?: string }) => {
+  console.log("🚀 Fetching designers with filters:", filters);
+  
+  try {
+    const constraints: QueryConstraint[] = [];
+    const listingsRef = collection(db, "listings");
+
+    if (filters?.city) {
+      constraints.push(where("businessLocation.city", "==", filters.city));
+    }
+
+    if (filters?.state) {
+      constraints.push(where("businessLocation.state", "==", filters.state));
+    }
+
+    constraints.push(orderBy("createdAt", "desc"));
+
+    const q = query(listingsRef, ...constraints);
+    const snapshot = await getDocs(q);
+
+    const designers = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as ListingData[];
+
+    console.log(`🔥 Fetched ${designers.length} designers.`);
+
+    // Convert location to coordinates for each designer
+    const designersWithCoords = await Promise.all(
+      designers.map(async (designer) => {
+        if (designer.businessLocation) {
+          const coords = designer.businessLocation?.city && designer.businessLocation?.state
+  ? await convertLocationToCoordinates(designer.businessLocation.city, designer.businessLocation.state)
+  : null;
+
+          return { ...designer, coordinates: coords };
+        }
+        return designer;
+      })
+    );
+
+    return designersWithCoords;
+  } catch (error) {
+    console.error("❌ Error fetching designers:", error);
+    return [];
+  }
+};
+
+/**
+ * Converts city/state to latitude & longitude using Google Maps API.
+ * @param {string} city - The city name.
+ * @param {string} state - The state name.
+ * @returns {Promise<{ lat: number, lng: number } | null>} - Coordinates or null.
+ */
+export const convertLocationToCoordinates = async (city: string, state: string) => {
+  const apiKey = "AIzaSyBfb9JewVfyW_H-a4yAJe8zQPPOD-i2Ysc"; 
+  const location = `${city}, ${state}`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${apiKey}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.status === "OK" && data.results.length > 0) {
+      const { lat, lng } = data.results[0].geometry.location;
+      return { lat, lng };
+    } else {
+      console.warn("⚠️ No results found for:", location);
+      return null;
+    }
+  } catch (error) {
+    console.error("❌ Error converting location:", error);
+    return null;
+  }
+};
+
+
+
 /**
  * Fetches a single listing from Firestore by ID.
  * @param {string} id - The ID of the listing.
