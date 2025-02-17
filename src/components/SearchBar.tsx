@@ -19,7 +19,6 @@ interface SearchBarProps {
   userCoords?: Coordinates;
 }
 
-
 export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) => {
   const [location, setLocation] = useState('');
   const [zipCode, setZipCode] = useState('');
@@ -175,7 +174,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
   };
 
   return (
-
     <form className="w-full" onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1 relative">
@@ -188,6 +186,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
               autocomplete.setTypes(['(cities)']);
             }}
             onPlaceChanged={handleLocationSelect}
+            options={{
+              fields: ['address_components', 'formatted_address', 'geometry'],
+              types: ['(cities)']
+            }}
           >
             <input
               type="text"
@@ -206,6 +208,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
               autocomplete.setTypes(['postal_code']);
             }}
             onPlaceChanged={handleZipSelect}
+            options={{
+              fields: ['address_components', 'formatted_address', 'geometry'],
+              types: ['postal_code']
+            }}
           >
             <input
               type="text"
@@ -245,7 +251,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
         <p className="mt-2 text-sm text-red-600">{geoError}</p>
       )}
     </form>
-
   );
 };
 

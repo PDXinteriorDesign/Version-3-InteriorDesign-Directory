@@ -54,7 +54,7 @@ export const DesignerProfilePage: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Navbar />
-        <p className="text-gray-700 text-lg">Loading...</p>
+
       </div>
     );
   }
