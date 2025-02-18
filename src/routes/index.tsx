@@ -44,6 +44,7 @@ export const AppRoutes = [
   { path: '/resources/articles', element: <ArticlesPage /> },
   { path: '/list-with-us', element: <ListBusinessPage /> },
   { path: '/designers', element: <DesignersPage /> },
+  { path: '/designers/:state', element: <DesignersPage /> },
   { path: '/list-with-us/success', element: <SuccessPage /> },
   { path: '/find-designer', element: <FindDesignerPage /> },
   { path: '/design-styles', element: <DesignStylesPage /> },
@@ -53,7 +54,6 @@ export const AppRoutes = [
   { path: '/resources/diy', element: <DIYProjectsPage /> },
   { path: '/resources/blog', element: <DesignBlogPage /> },
   { path: '/designers/:id', element: <DesignerProfilePage /> },
-  { path: '/designers/:state', element: <DesignersStatePage /> },
   { path: '/designers/:state/:city', element: <DesignersCityPage /> },
 
 ];

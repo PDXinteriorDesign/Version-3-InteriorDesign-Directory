@@ -30,8 +30,10 @@ export const HomePage: React.FC = () => {
     profileImage: listing.portfolio.images[0] || '/placeholder-profile.jpg',
     coverImage: listing.portfolio.images[1] || '/placeholder-cover.jpg',
     portfolioImages: listing.portfolio.images,
-    location: `${listing.businessLocation.city}, ${listing.businessLocation.state}`,
-    experience: 1,
+    location: listing.businessLocation ?
+      `${listing.businessLocation.city}, ${listing.businessLocation.state}` :
+      'Location not specified',
+    experience: parseInt(listing.businessInfo.experience ?? '0') || 1,
     contact: {
       phone: listing.businessInfo.phone,
       email: listing.businessInfo.email,

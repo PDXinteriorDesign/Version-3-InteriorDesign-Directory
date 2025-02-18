@@ -31,7 +31,9 @@ export const DesignersPage: React.FC = () => {
     profileImage: listing.portfolio.images[0] || '/placeholder-profile.jpg',
     coverImage: listing.portfolio.images[1] || '/placeholder-cover.jpg',
     portfolioImages: listing.portfolio.images,
-    location: `${listing.businessLocation.city}, ${listing.businessLocation.state}`,
+    location: listing.businessLocation ?
+      `${listing.businessLocation.city}, ${listing.businessLocation.state}` :
+      'Location not specified',
     experience: 1,
     contact: {
       phone: listing.businessInfo.phone,

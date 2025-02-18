@@ -12,7 +12,7 @@ interface DesignerCardProps {
 export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
   const mainStyle = designer.specialty[0];
   const styleColor = getStyleColor(mainStyle);
-  console.log("DesignerCard data:", JSON.stringify(designer, null, 2));
+
 
 
 

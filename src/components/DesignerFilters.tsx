@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Filter, Star, MapPin, Palette, ChevronDown } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface DesignerFiltersProps {
   filters: {
@@ -27,10 +28,91 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
   onClearFilters
 }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const updateURL = (name: string, value: string | number | string[]) => {
+    const searchParams = new URLSearchParams(location.search);
+
+    if (name === 'state') {
+      if (typeof value === 'string' && value) {
+        let newPath = `/designers/${value.toLowerCase()}`;
+
+        const otherParams = new URLSearchParams();
+        searchParams.forEach((val, key) => {
+          if (key !== 'state') {
+            otherParams.set(key, val);
+          }
+        });
+
+        const queryString = otherParams.toString();
+        if (queryString) {
+          newPath += `?${queryString}`;
+        }
+
+        navigate(newPath);
+        return;
+      }
+    } else {
+      if (Array.isArray(value)) {
+        if (value.length > 0) {
+          searchParams.set(name, value.join(','));
+        } else {
+          searchParams.delete(name);
+        }
+      } else if (value) {
+        searchParams.set(name, value.toString());
+      } else {
+        searchParams.delete(name);
+      }
+
+      let newPath = location.pathname;
+      const queryString = searchParams.toString();
+      if (queryString) {
+        newPath += `?${queryString}`;
+      }
+
+      navigate(newPath);
+    }
+  };
+
+  const handleFilterChange = (name: string, value: string | number | string[]) => {
+    onFilterChange(name, value);
+    updateURL(name, value);
+  };
+
+  const handleClearFilters = () => {
+    onClearFilters();
+    navigate('/designers');
+  };
+
+  useEffect(() => {
+    const path = location.pathname.split('/');
+    const state = path[2];
+    const searchParams = new URLSearchParams(location.search);
+
+    if (state) {
+      const formattedState = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase();
+      onFilterChange('state', formattedState);
+    }
+
+    searchParams.forEach((value, key) => {
+      if (key === 'styles') {
+        onFilterChange(key, value.split(','));
+      } else if (key === 'minRating') {
+        onFilterChange(key, parseFloat(value));
+      } else if (key !== 'state') {
+        onFilterChange(key, value);
+      }
+    });
+  }, []);
 
   const toggleDropdown = (name: string) => {
     setActiveDropdown(activeDropdown === name ? null : name);
   };
+
+
+
 
   return (
     <div className="bg-white rounded-xl shadow-sm mb-8">
@@ -42,7 +124,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
           </div>
           {(filters.state || filters.city || filters.styles.length > 0 || filters.priceRange) && (
             <button
-              onClick={onClearFilters}
+              onClick={handleClearFilters}
               className="text-sm text-gray-500 hover:text-sage-600 transition-colors"
             >
               Clear All
@@ -62,7 +144,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
             <span>{filters.state || filters.city ? `${filters.city || filters.state}` : 'Location'}</span>
             <ChevronDown className="w-4 h-4" />
           </button>
-          
+
           {activeDropdown === 'location' && (
             <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg p-4 z-10">
               <div className="space-y-4">
@@ -70,7 +152,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
                   <label className="block text-sm text-gray-600 mb-1">State</label>
                   <select
                     value={filters.state}
-                    onChange={(e) => onFilterChange('state', e.target.value)}
+                    onChange={(e) => handleFilterChange('state', e.target.value)}
                     className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg"
                   >
                     <option value="">All States</option>
@@ -84,7 +166,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
                   <input
                     type="text"
                     value={filters.city}
-                    onChange={(e) => onFilterChange('city', e.target.value)}
+                    onChange={(e) => handleFilterChange('city', e.target.value)}
                     placeholder="Enter city name"
                     className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg"
                   />
@@ -104,7 +186,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
             <span>{filters.styles.length ? `${filters.styles.length} Selected` : 'Style'}</span>
             <ChevronDown className="w-4 h-4" />
           </button>
-          
+
           {activeDropdown === 'style' && (
             <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg p-4 z-10">
               <div className="grid grid-cols-2 gap-2">
@@ -117,11 +199,10 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
                         : [...filters.styles, style];
                       onFilterChange('styles', newStyles);
                     }}
-                    className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                      filters.styles.includes(style)
-                        ? 'bg-sage-600 text-white'
-                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
-                    }`}
+                    className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.styles.includes(style)
+                      ? 'bg-sage-600 text-white'
+                      : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                      }`}
                   >
                     {style}
                   </button>
@@ -141,7 +222,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
             <span>{filters.minRating ? `${filters.minRating}+ Stars` : 'Rating'}</span>
             <ChevronDown className="w-4 h-4" />
           </button>
-          
+
           {activeDropdown === 'rating' && (
             <div className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg p-4 z-10">
               <div className="space-y-2">
@@ -149,11 +230,10 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
                   <button
                     key={rating}
                     onClick={() => onFilterChange('minRating', rating)}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
-                      filters.minRating === rating
-                        ? 'bg-sage-600 text-white'
-                        : 'hover:bg-gray-50'
-                    }`}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${filters.minRating === rating
+                      ? 'bg-sage-600 text-white'
+                      : 'hover:bg-gray-50'
+                      }`}
                   >
                     <span>{rating}+ Stars</span>
                     <Star className={`w-4 h-4 ${filters.minRating === rating ? 'fill-current' : ''}`} />
@@ -174,7 +254,7 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
             <span>{filters.priceRange || ''}</span>
             <ChevronDown className="w-4 h-4" />
           </button>
-          
+
           {activeDropdown === 'price' && (
             <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg p-4 z-10">
               <div className="space-y-2">
@@ -182,11 +262,10 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
                   <button
                     key={range}
                     onClick={() => onFilterChange('priceRange', range)}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                      filters.priceRange === range
-                        ? 'bg-sage-600 text-white'
-                        : 'hover:bg-gray-50'
-                    }`}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${filters.priceRange === range
+                      ? 'bg-sage-600 text-white'
+                      : 'hover:bg-gray-50'
+                      }`}
                   >
                     {range}
                   </button>

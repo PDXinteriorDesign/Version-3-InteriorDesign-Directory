@@ -148,7 +148,6 @@ export const getListingById = async (id: string): Promise<ListingData | null> =>
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("✅ Document found:", docSnap.data());
       return { id: docSnap.id, ...docSnap.data() } as ListingData;
     } else {
       console.log("❌ Document does NOT exist for ID:", id);
@@ -198,9 +197,6 @@ export const getListings = async (
     const snapshot = await getDocs(q);
     console.log(`🔥 Query executed, ${snapshot.docs.length} documents fetched`);
 
-    snapshot.docs.forEach((doc) => {
-      console.log(`📄 Document ID: ${doc.id}`, JSON.stringify(doc.data(), null, 2));
-    });
 
     return snapshot.docs.map((doc) => ({
       id: doc.id,
