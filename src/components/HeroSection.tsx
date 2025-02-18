@@ -3,7 +3,17 @@ import { SearchBar } from './SearchBar';
 import { Logo } from './Logo';
 import { Sparkles, Star, Users, Home } from 'lucide-react';
 
+
+
 export const HeroSection: React.FC = () => {
+
+  const handleSearch = (filters: SearchFilters) => {
+    console.log('Search filters:', filters);
+    // Handle the search results
+  };
+
+
+
   return (
     <div className="relative bg-gradient-to-br from-sage-100 via-sage-50 to-azure-50 overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -35,7 +45,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         <div className="max-w-2xl mx-auto mb-12">
-          <SearchBar onSearch={() => { }}
+          <SearchBar onSearch={handleSearch}
           />
         </div>
 

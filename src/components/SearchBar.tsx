@@ -1,10 +1,22 @@
 import React, { useState, useRef } from 'react';
 import { Search, MapPin, Loader } from 'lucide-react';
 import { Autocomplete } from '@react-google-maps/api';
+import { getDesignersByLocation, convertLocationToCoordinates } from '../lib/firebase/listings';
 
 interface Coordinates {
   lat: number;
   lng: number;
+}
+
+interface Designer {
+  id: string;
+  businessLocation: {
+    city: string;
+    state: string;
+  };
+  coordinates?: Coordinates;
+  distance?: string;
+  [key: string]: any;
 }
 
 interface SearchFilters {
@@ -28,8 +40,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
   const zipAutocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
 
   const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-    if (!lat1 || !lon1 || !lat2 || !lon2) return null;
-
     const R = 6371;
     const dLat = (lat2 - lat1) * (Math.PI / 180);
     const dLon = (lon2 - lon1) * (Math.PI / 180);
@@ -45,61 +55,115 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
     return `${miles.toFixed(1)} mi`;
   };
 
-  const handleLocationSelect = () => {
+  const handleLocationSelect = async () => {
     const place = locationAutocompleteRef.current?.getPlace();
     if (place && place.geometry?.location) {
-      const lat = place.geometry.location.lat();
-      const lng = place.geometry.location.lng();
-      const postalCode = place.address_components?.find(comp =>
-        comp.types.includes('postal_code')
-      )?.long_name || '';
+      setLoading(true);
+      try {
+        const cityComponent = place.address_components?.find(comp =>
+          comp.types.includes('locality')
+        );
+        const stateComponent = place.address_components?.find(comp =>
+          comp.types.includes('administrative_area_level_1')
+        );
 
-      setLocation(place.formatted_address || '');
-      setZipCode(postalCode);
+        const city = cityComponent?.long_name;
+        const state = stateComponent?.long_name;
 
-      const distance = userCoords ? calculateDistance(userCoords.lat, userCoords.lng, lat, lng) : null;
+        if (city && state) {
+          // Get designers from Firebase based on location
+          const designers = await getDesignersByLocation({
+            city,
+            state
+          });
 
-      onSearch({
-        location: place.formatted_address || '',
-        zipCode: postalCode,
-        coordinates: { lat, lng },
-        distance: distance || undefined
-      });
+          // Convert location to coordinates
+          const coords = await convertLocationToCoordinates(city, state);
+          console.log('🔍 Location coordinates:', coords);
+          console.log('👩‍🎨 Designers found:', designers);
+
+          if (coords && userCoords) {
+            const distance = calculateDistance(
+              userCoords.lat,
+              userCoords.lng,
+              coords.lat,
+              coords.lng
+            );
+            console.log('📏 Distance:', distance);
+          }
+
+          setLocation(place.formatted_address || '');
+          onSearch({
+            location: place.formatted_address || '',
+            zipCode,
+            coordinates: coords || undefined
+          });
+        }
+      } catch (error) {
+        console.error('Error processing location:', error);
+        setGeoError('Error processing location. Please try again.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
-  const handleZipSelect = () => {
+  const handleZipSelect = async () => {
     const place = zipAutocompleteRef.current?.getPlace();
     if (place && place.geometry?.location) {
-      const lat = place.geometry.location.lat();
-      const lng = place.geometry.location.lng();
+      setLoading(true);
+      try {
+        const cityComponent = place.address_components?.find(comp =>
+          comp.types.includes('locality')
+        );
+        const stateComponent = place.address_components?.find(comp =>
+          comp.types.includes('administrative_area_level_1')
+        );
+        const postalCode = place.address_components?.find(comp =>
+          comp.types.includes('postal_code')
+        )?.long_name || '';
 
-      const cityComponent = place.address_components?.find(comp =>
-        comp.types.includes('locality')
-      );
-      const stateComponent = place.address_components?.find(comp =>
-        comp.types.includes('administrative_area_level_1')
-      );
-      const postalCode = place.address_components?.find(comp =>
-        comp.types.includes('postal_code')
-      )?.long_name || '';
+        const city = cityComponent?.long_name;
+        const state = stateComponent?.long_name;
 
-      const cityState = [
-        cityComponent?.long_name,
-        stateComponent?.short_name
-      ].filter(Boolean).join(', ');
+        if (city && state) {
+          // Get designers from Firebase based on location
+          const designers = await getDesignersByLocation({
+            city,
+            state
+          });
 
-      setLocation(cityState);
-      setZipCode(postalCode);
+          // Convert location to coordinates
+          const coords = await convertLocationToCoordinates(city, state);
+          console.log('🔍 ZIP location coordinates:', coords);
+          console.log('👩‍🎨 Designers found:', designers);
 
-      const distance = userCoords ? calculateDistance(userCoords.lat, userCoords.lng, lat, lng) : null;
+          if (coords && userCoords) {
+            const distance = calculateDistance(
+              userCoords.lat,
+              userCoords.lng,
+              coords.lat,
+              coords.lng
+            );
+            console.log('📏 Distance:', distance);
+          }
 
-      onSearch({
-        location: cityState,
-        zipCode: postalCode,
-        coordinates: { lat, lng },
-        distance: distance || undefined
-      });
+          const cityState = [city, stateComponent?.short_name].filter(Boolean).join(', ');
+          setLocation(cityState);
+          setZipCode(postalCode);
+
+          onSearch({
+            location: cityState,
+            zipCode: postalCode,
+            coordinates: coords || undefined
+          });
+        }
+      } catch (error) {
+        console.error('Error processing ZIP location:', error);
+        setGeoError('Error processing location. Please try again.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -114,39 +178,70 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) =>
     }
 
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
 
-        // Reverse geocode to get address
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode(
-          { location: { lat: latitude, lng: longitude } },
-          (results, status) => {
-            if (status === 'OK' && results?.[0]) {
-              const place = results[0];
-              const postalCode = place.address_components?.find(comp =>
-                comp.types.includes('postal_code')
-              )?.long_name || '';
+          // Reverse geocode to get address
+          const geocoder = new google.maps.Geocoder();
+          geocoder.geocode(
+            { location: { lat: latitude, lng: longitude } },
+            async (results, status) => {
+              if (status === 'OK' && results?.[0]) {
+                const place = results[0];
+                const cityComponent = place.address_components?.find(comp =>
+                  comp.types.includes('locality')
+                );
+                const stateComponent = place.address_components?.find(comp =>
+                  comp.types.includes('administrative_area_level_1')
+                );
+                const postalCode = place.address_components?.find(comp =>
+                  comp.types.includes('postal_code')
+                )?.long_name || '';
 
-              setLocation(place.formatted_address || 'Current Location');
-              setZipCode(postalCode);
+                const city = cityComponent?.long_name;
+                const state = stateComponent?.long_name;
 
-              const distance = userCoords ?
-                calculateDistance(userCoords.lat, userCoords.lng, latitude, longitude) :
-                null;
+                if (city && state) {
+                  // Get designers from Firebase based on location
+                  const designers = await getDesignersByLocation({
+                    city,
+                    state
+                  });
 
-              onSearch({
-                location: place.formatted_address || 'Current Location',
-                zipCode: postalCode,
-                coordinates: { lat: latitude, lng: longitude },
-                distance: distance || undefined
-              });
-            } else {
-              setGeoError('Unable to find address for your location');
+                  console.log('📍 Current location coords:', { lat: latitude, lng: longitude });
+                  console.log('👩‍🎨 Nearby designers:', designers);
+
+                  if (userCoords) {
+                    const distance = calculateDistance(
+                      userCoords.lat,
+                      userCoords.lng,
+                      latitude,
+                      longitude
+                    );
+                    console.log('📏 Distance:', distance);
+                  }
+
+                  setLocation(place.formatted_address || 'Current Location');
+                  setZipCode(postalCode);
+
+                  onSearch({
+                    location: place.formatted_address || 'Current Location',
+                    zipCode: postalCode,
+                    coordinates: { lat: latitude, lng: longitude }
+                  });
+                }
+              } else {
+                setGeoError('Unable to find address for your location');
+              }
+              setLoading(false);
             }
-            setLoading(false);
-          }
-        );
+          );
+        } catch (error) {
+          console.error('Error processing geolocation:', error);
+          setGeoError('Error processing your location. Please try again.');
+          setLoading(false);
+        }
       },
       (error) => {
         setLoading(false);

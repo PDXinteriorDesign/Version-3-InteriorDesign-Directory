@@ -61,7 +61,7 @@ export const createListing = async (data: ListingData): Promise<string> => {
  */
 export const getDesignersByLocation = async (filters?: { city?: string; state?: string }) => {
   console.log("🚀 Fetching designers with filters:", filters);
-  
+
   try {
     const constraints: QueryConstraint[] = [];
     const listingsRef = collection(db, "listings");
@@ -91,8 +91,8 @@ export const getDesignersByLocation = async (filters?: { city?: string; state?: 
       designers.map(async (designer) => {
         if (designer.businessLocation) {
           const coords = designer.businessLocation?.city && designer.businessLocation?.state
-  ? await convertLocationToCoordinates(designer.businessLocation.city, designer.businessLocation.state)
-  : null;
+            ? await convertLocationToCoordinates(designer.businessLocation.city, designer.businessLocation.state)
+            : null;
 
           return { ...designer, coordinates: coords };
         }
@@ -114,7 +114,7 @@ export const getDesignersByLocation = async (filters?: { city?: string; state?: 
  * @returns {Promise<{ lat: number, lng: number } | null>} - Coordinates or null.
  */
 export const convertLocationToCoordinates = async (city: string, state: string) => {
-  const apiKey = "AIzaSyBfb9JewVfyW_H-a4yAJe8zQPPOD-i2Ysc"; 
+  const apiKey = "AIzaSyBfb9JewVfyW_H-a4yAJe8zQPPOD-i2Ysc";
   const location = `${city}, ${state}`;
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${apiKey}`;
 
@@ -134,6 +134,8 @@ export const convertLocationToCoordinates = async (city: string, state: string) 
     return null;
   }
 };
+
+
 
 
 
@@ -158,6 +160,9 @@ export const getListingById = async (id: string): Promise<ListingData | null> =>
     return null;
   }
 };
+
+
+
 
 /**
  * Fetches listings from Firestore with optional filters.
