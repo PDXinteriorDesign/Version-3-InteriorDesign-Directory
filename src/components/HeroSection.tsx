@@ -1,17 +1,38 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SearchBar } from './SearchBar';
 import { Logo } from './Logo';
 import { Sparkles, Star, Users, Home } from 'lucide-react';
+import { SearchFilters } from '../types';
 
 
 
 export const HeroSection: React.FC = () => {
 
+  const navigate = useNavigate();
+
   const handleSearch = (filters: SearchFilters) => {
     console.log('Search filters:', filters);
-    // Handle the search results
-  };
 
+    // Create query parameters from search filters
+    const queryParams = new URLSearchParams();
+
+    if (filters.location) {
+      queryParams.append('location', filters.location);
+    }
+
+    if (filters.zipCode) {
+      queryParams.append('zipCode', filters.zipCode);
+    }
+
+    if (filters.coordinates) {
+      queryParams.append('lat', filters.coordinates.lat.toString());
+      queryParams.append('lng', filters.coordinates.lng.toString());
+    }
+
+    // Redirect to the search results page with query parameters
+    navigate(`/search?${queryParams.toString()}`);
+  };
 
 
   return (

@@ -32,6 +32,15 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
   const location = useLocation();
 
   const updateURL = (name: string, value: string | number | string[]) => {
+    // If we're on a profile page (URL contains an ID, not a state), don't update URL
+    const path = location.pathname.split('/');
+    const stateOrId = path[2];
+
+    if (stateOrId && !states.map(s => s.toLowerCase()).includes(stateOrId.toLowerCase())) {
+      // We're on a profile page, just update the filter state but don't change URL
+      return;
+    }
+
     const searchParams = new URLSearchParams(location.search);
 
     if (name === 'state') {
@@ -88,14 +97,23 @@ export const DesignerFilters: React.FC<DesignerFiltersProps> = ({
 
   useEffect(() => {
     const path = location.pathname.split('/');
-    const state = path[2];
+    const stateOrId = path[2];
     const searchParams = new URLSearchParams(location.search);
 
-    if (state) {
-      const formattedState = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase();
-      onFilterChange('state', formattedState);
+    if (stateOrId) {
+      // Check if this is a state or an ID
+      const formattedValue = stateOrId.charAt(0).toUpperCase() + stateOrId.slice(1).toLowerCase();
+
+      // You need some logic here to determine if this is a state or ID
+      if (states.map(s => s.toLowerCase()).includes(stateOrId.toLowerCase())) {
+        onFilterChange('state', formattedValue);
+      } else {
+        // This is likely an ID - navigate to profile or ignore for filtering
+        return; // Don't process it as a filter
+      }
     }
 
+    // Continue with processing other search parameters...
     searchParams.forEach((value, key) => {
       if (key === 'styles') {
         onFilterChange(key, value.split(','));

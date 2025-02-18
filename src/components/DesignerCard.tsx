@@ -19,7 +19,7 @@ export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
 
 
   return (
-    <Link to={`/designers/${designer.id}`} className="block group">
+    <Link to={`/designer/${designer.id}`} className="block group">
 
       <div className={`bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border-t-4 ${styleColor.border}`}>
         <div className="relative h-64">
