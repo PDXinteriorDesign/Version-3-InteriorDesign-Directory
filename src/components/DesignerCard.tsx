@@ -10,9 +10,11 @@ interface DesignerCardProps {
 }
 
 export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
-  const mainStyle = designer.specialty[0];
+  const mainStyle = designer?.specialty?.[0] || '';
   const styleColor = getStyleColor(mainStyle);
 
+
+  const fallbackImage = 'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg'
 
 
 
@@ -24,7 +26,7 @@ export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
       <div className={`bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border-t-4 ${styleColor.border}`}>
         <div className="relative h-64">
           <img
-            src={optimizeImageUrl(designer.coverImage, 800)}
+            src={designer.coverImage ? optimizeImageUrl(designer.coverImage, 800) : fallbackImage}
             alt={designer.name}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
@@ -32,7 +34,7 @@ export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
           <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4`}>
             <div className="flex items-center space-x-3 mb-2">
               <img
-                src={optimizeImageUrl(designer.profileImage, 100)}
+                src={designer.profileImage ? optimizeImageUrl(designer.profileImage, 100) : fallbackImage}
                 alt={designer.name}
                 className="w-12 h-12 rounded-full border-2 border-white object-cover"
                 loading="lazy"
@@ -54,7 +56,7 @@ export const DesignerCard: React.FC<DesignerCardProps> = ({ designer }) => {
           </div>
           <p className="text-gray-700 mb-3 line-clamp-3">{designer.personalBio}</p>
           <div className="flex flex-wrap gap-2 mb-3">
-            {designer.specialty.slice(0, 2).map((spec, index) => (
+            {(designer.specialty || []).slice(0, 2).map((spec, index) => (
               <span
                 key={index}
                 className={`px-2 py-1 text-sm rounded-full ${getStyleColor(spec).badge}`}
