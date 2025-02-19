@@ -4,9 +4,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://thedesignrefuge.com/sitemap.xml
-
-# Disallow state/city pages (under development)
-Disallow: /designers/*
-
-# Disallow everything else (catch-all rule)
-Disallow: /*
