@@ -2,20 +2,7 @@ User-agent: *
 
 # Allow the specific URLs from your sitemap (list them all here)
 Allow: /
-Allow: /designers
-Allow: /design-styles
-Allow: /project-gallery
-Allow: /resources/tips
-Allow: /budget-design
-Allow: /resources/diy
-Allow: /resources/blog
-Allow: /contact
-Allow: /about
-Allow: /for-designers
-Allow: /resources/templates
-Allow: /profit-calculator
-Allow: /resources/growth-strategies
-Allow: /designer/*  # Allow all designer profiles
+
 Sitemap: https://thedesignrefuge.com/sitemap.xml
 
 # Disallow state/city pages (under development)
