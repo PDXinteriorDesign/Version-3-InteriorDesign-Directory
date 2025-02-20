@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Designer } from '../types';
 import { DesignerCard } from './DesignerCard';
 import { Loader, MapPin } from 'lucide-react';
@@ -18,19 +18,22 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
   error,
   userLocationPermission
 }) => {
-  const formatDesigner = (listing: any) => {
-    const formattedDistance = listing.distance ? (
-      <div className="flex items-center text-sm text-gray-600">
-        <MapPin className="w-4 h-4 mr-1" />
-        <span>{(parseFloat(listing.distance) * 1.60934).toFixed(1)} km away</span>
-      </div>
-    ) : userLocationPermission === false ? (
-      <div className="flex items-center text-sm text-gray-500 italic">
-        <MapPin className="w-4 h-4 mr-1" />
-        <span>Enable location to see distance</span>
-      </div>
-    ) : null;
+  // Add state to track if component has loaded
+  const [isLoaded, setIsLoaded] = useState(false);
 
+  // Set loaded state after component mounts
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  // Force re-render when designers data changes
+  useEffect(() => {
+    if (designers.length > 0 || nearbyDesigners.length > 0) {
+      setIsLoaded(true);
+    }
+  }, [designers, nearbyDesigners]);
+
+  const formatDesigner = (listing: any) => {
     return {
       id: listing.id,
       name: listing.businessInfo?.name || '',
@@ -46,7 +49,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
       location: listing.businessLocation ?
         `${listing.businessLocation.city || ''}, ${listing.businessLocation.state || ''}` :
         'Location not specified',
-      distanceElement: formattedDistance,
+      distance: listing.distance,
       experience: parseInt(listing.businessInfo?.experience ?? '0') || 1,
       contact: {
         phone: listing.businessInfo?.phone || '',
@@ -60,10 +63,39 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
     };
   };
 
+  // Create separate distance badge component
+  const DistanceBadge = ({ designer, hasPermission }: { designer: Designer, hasPermission?: boolean }) => {
+    // Check for distance data
+    if (!designer.distance && hasPermission !== false) return null;
+
+    // Use setTimeout to ensure the badge renders after everything else
+    const [showBadge, setShowBadge] = useState(false);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setShowBadge(true);
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+    if (!showBadge) return null;
+
+    return (
+      <div className="absolute top-3 right-3 bg-white/95 rounded-full px-3 py-1 text-sm shadow-md flex items-center text-gray-700 z-50 pointer-events-none">
+        <MapPin size={14} className="mr-1 text-gray-600" />
+        {designer.distance ?
+          <span>{designer.distance} km away</span> :
+          <span>Enable location</span>
+        }
+      </div>
+    );
+  };
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <Loader className="w-6 h-6 animate-spin mr-2" />
+      <div className="flex justify-center items-center py-12">
+        <Loader className="animate-spin mr-2" />
         <span>Searching for designers...</span>
       </div>
     );
@@ -71,28 +103,40 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-12">
-        <p className="text-red-600 text-lg font-medium">{error}</p>
-        <p className="text-gray-600 mt-2">
+      <div className="text-center py-12">
+        <div className="text-xl font-medium text-gray-800 mb-2">{error}</div>
+        <p className="text-gray-600">
           Try searching with a different location or browse all designers.
         </p>
       </div>
     );
   }
 
-
+  if (!isLoaded) {
+    return (
+      <div className="flex justify-center items-center py-12">
+        <Loader className="animate-spin mr-2" />
+        <span>Loading results...</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {designers.length > 0 && (
         <div>
-          <h2 className="mb-8 text-gray-600">{designers.length} designers found </h2>
+          <h2 className="text-2xl font-serif mb-6">
+            {designers.length} designers found
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {designers.map((designer) => (
-              <DesignerCard
-                key={designer.id}
-                designer={formatDesigner(designer)}
-              />
+              <div key={designer.id} className="relative overflow-visible">
+                <DesignerCard designer={formatDesigner(designer)} />
+                <DistanceBadge
+                  designer={designer}
+                  hasPermission={userLocationPermission}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -100,13 +144,16 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
 
       {nearbyDesigners.length > 0 && (
         <div>
-          <h2 className="text-2xl font-semibold mb-4">Nearby Designers</h2>
+          <h2 className="text-2xl font-serif mb-6">Nearby Designers</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {nearbyDesigners.map((designer) => (
-              <DesignerCard
-                key={designer.id}
-                designer={formatDesigner(designer)}
-              />
+              <div key={designer.id} className="relative overflow-visible">
+                <DesignerCard designer={formatDesigner(designer)} />
+                <DistanceBadge
+                  designer={designer}
+                  hasPermission={userLocationPermission}
+                />
+              </div>
             ))}
           </div>
         </div>
