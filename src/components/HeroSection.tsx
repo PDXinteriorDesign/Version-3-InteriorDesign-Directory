@@ -12,7 +12,6 @@ export const HeroSection: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSearch = (filters: SearchFilters) => {
-    console.log('Search filters:', filters);
 
     // Create query parameters from search filters
     const queryParams = new URLSearchParams();

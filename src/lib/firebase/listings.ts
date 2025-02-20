@@ -60,7 +60,6 @@ export const createListing = async (data: ListingData): Promise<string> => {
  * @returns {Promise<ListingData[]>} An array of designers.
  */
 export const getDesignersByLocation = async (filters?: { city?: string; state?: string }) => {
-  console.log("🚀 Fetching designers with filters:", filters);
 
   try {
     const constraints: QueryConstraint[] = [];
@@ -84,7 +83,6 @@ export const getDesignersByLocation = async (filters?: { city?: string; state?: 
       ...doc.data(),
     })) as ListingData[];
 
-    console.log(`🔥 Fetched ${designers.length} designers.`);
 
     // Convert location to coordinates for each designer
     const designersWithCoords = await Promise.all(
@@ -152,7 +150,6 @@ export const getListingById = async (id: string): Promise<ListingData | null> =>
     if (docSnap.exists()) {
       return { id: docSnap.id, ...docSnap.data() } as ListingData;
     } else {
-      console.log("❌ Document does NOT exist for ID:", id);
       return null;
     }
   } catch (error) {
@@ -174,7 +171,6 @@ export const getListingById = async (id: string): Promise<ListingData | null> =>
 export const getListings = async (
   filters?: { status?: string; city?: string; state?: string }
 ): Promise<ListingData[]> => {
-  console.log("🚀 getListings CALLED with filters:", filters);
   try {
     const constraints: QueryConstraint[] = [];
     const listingsRef = collection(db, LISTINGS_COLLECTION);
@@ -200,7 +196,6 @@ export const getListings = async (
 
     // Execute the query
     const snapshot = await getDocs(q);
-    console.log(`🔥 Query executed, ${snapshot.docs.length} documents fetched`);
 
 
     return snapshot.docs.map((doc) => ({

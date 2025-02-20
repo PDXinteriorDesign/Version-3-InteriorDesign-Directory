@@ -8,18 +8,11 @@ import { MapPin } from 'lucide-react';
 export const DesignersStatePage: React.FC = () => {
   const { state } = useParams<{ state: string }>();
 
-  // Debugging logs
-  console.log("🌍 State Param from URL:", state);
 
-  // Ensure we handle case sensitivity
   const stateSlug = state?.toLowerCase() || '';
-  console.log("🛠 Received stateSlug from URL:", stateSlug);
 
-  // Fetch location correctly
   const location = getLocationBySlug(stateSlug);
 
-  // Debugging logs
-  console.log("✅ Matched Location:", location);
 
   // Handle case where state is not found
   if (!location) {

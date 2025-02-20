@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Navbar } from '../components/Navbar';
-
 import { SearchBar } from './SearchBar';
 import { SearchResults } from './SearchResults';
 import { Designer, SearchFilters } from '../types';
 import { getDesignersByLocation } from '../lib/firebase/listings';
 
 const SearchResultsPage = () => {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [designers, setDesigners] = useState<Designer[]>([]);
     const [nearbyDesigners, setNearbyDesigners] = useState<Designer[]>([]);
     const [loading, setLoading] = useState(false);
@@ -18,7 +17,6 @@ const SearchResultsPage = () => {
     const [locationPermission, setLocationPermission] = useState<boolean | undefined>();
     const [currentLocation, setCurrentLocation] = useState<string>('');
     const [currentState, setCurrentState] = useState<string>('');
-
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -41,20 +39,6 @@ const SearchResultsPage = () => {
     }, []);
 
     useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setUserCoords({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    });
-                },
-                (error) => console.error('Geolocation error:', error)
-            );
-        }
-    }, []);
-
-    useEffect(() => {
         const location = searchParams.get('location');
         const zipCode = searchParams.get('zipCode');
         const lat = searchParams.get('lat');
@@ -67,7 +51,6 @@ const SearchResultsPage = () => {
             geocoder.geocode({ location: latlng }, async (results, status) => {
                 if (status === 'OK' && results?.[0]) {
                     const place = results[0];
-
                     const cityComponent = place.address_components?.find(comp =>
                         comp.types.includes('locality')
                     );
@@ -92,8 +75,24 @@ const SearchResultsPage = () => {
         }
     }, [searchParams]);
 
+    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * (Math.PI / 180);
+        const dLon = (lon2 - lon1) * (Math.PI / 180);
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * (Math.PI / 180)) *
+            Math.cos(lat2 * (Math.PI / 180)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const km = R * c;
+        const miles = km * 0.621371;
+        return `${miles.toFixed(1)} mi`;
+    };
+
+
     const handleSearch = async (filters: SearchFilters) => {
-        console.log('Starting search with filters:', filters);
         setLoading(true);
         setError(null);
 
@@ -108,7 +107,6 @@ const SearchResultsPage = () => {
                 geocoder.geocode({ location: latlng }, async (results, status) => {
                     if (status === 'OK' && results?.[0]) {
                         const place = results[0];
-
                         const cityComponent = place.address_components?.find(comp =>
                             comp.types.includes('locality')
                         );
@@ -120,7 +118,6 @@ const SearchResultsPage = () => {
                         const state = stateComponent?.long_name;
 
                         if (city && state) {
-                            console.log(`Searching for designers in ${city}, ${state}`);
                             setCurrentLocation(city);
                             setCurrentState(state);
 
@@ -136,6 +133,9 @@ const SearchResultsPage = () => {
                                 return;
                             }
 
+                            // Create new URLSearchParams object
+                            const newSearchParams = new URLSearchParams(searchParams);
+
                             const processedDesigners = results.map(designer => {
                                 if (userCoords && designer.coordinates) {
                                     const distance = calculateDistance(
@@ -144,10 +144,17 @@ const SearchResultsPage = () => {
                                         designer.coordinates.lat,
                                         designer.coordinates.lng
                                     );
+
+                                    // Store the distance in URL params
+                                    newSearchParams.set(`distance-${designer.id}`, distance);
+
                                     return { ...designer, distance };
                                 }
                                 return designer;
                             });
+
+                            // Update URL params with all distances
+                            setSearchParams(newSearchParams);
 
                             const exactMatches = processedDesigners.filter(designer =>
                                 designer.businessLocation?.city?.toLowerCase() === city.toLowerCase() &&
@@ -161,7 +168,6 @@ const SearchResultsPage = () => {
 
                             setDesigners(exactMatches);
                             setNearbyDesigners(nearby);
-                            console.log("this is the exact match", exactMatches);
                         }
                     }
                 });
@@ -176,27 +182,11 @@ const SearchResultsPage = () => {
         }
     };
 
-
-    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-        const R = 6371;
-        const dLat = (lat2 - lat1) * (Math.PI / 180);
-        const dLon = (lon2 - lon1) * (Math.PI / 180);
-        const a =
-            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * (Math.PI / 180)) *
-            Math.cos(lat2 * (Math.PI / 180)) *
-            Math.sin(dLon / 2) *
-            Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const km = R * c;
-        return km.toFixed(1);
-    };
-
     return (
         <div className="min-h-screen bg-gray-50">
             <Helmet>
                 <title>
-                    {currentLocation 
+                    {currentLocation
                         ? `Interior Designers in ${currentLocation} | The Design Refuge`
                         : 'Find Interior Designers | The Design Refuge'}
                 </title>
@@ -216,8 +206,8 @@ const SearchResultsPage = () => {
                                     <>
                                         <li className="text-gray-500">/</li>
                                         <li>
-                                            <Link 
-                                                to={`/designers/${currentState.toLowerCase().replace(/\s+/g, '-')}`} 
+                                            <Link
+                                                to={`/designers/${currentState.toLowerCase().replace(/\s+/g, '-')}`}
                                                 className="text-gray-500 hover:text-gray-700"
                                             >
                                                 {currentState}
@@ -239,12 +229,12 @@ const SearchResultsPage = () => {
                 <div className="bg-white rounded-xl shadow-sm mb-12">
                     <div className="p-8">
                         <h1 className="text-4xl font-serif mb-4">
-                            {currentLocation && currentState 
+                            {currentLocation && currentState
                                 ? `Interior Designers in ${currentLocation}, ${currentState}`
                                 : 'Find Interior Designers Near You'}
                         </h1>
                         <p className="text-xl text-gray-600 max-w-3xl mb-8">
-                            {currentLocation 
+                            {currentLocation
                                 ? `Discover talented interior designers in ${currentLocation} who can help transform your space.`
                                 : 'Search for interior designers in your area to help bring your vision to life.'}
                         </p>

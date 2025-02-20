@@ -59,6 +59,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
     return `${miles.toFixed(1)} mi`;
   };
 
+
   const handleLocationSelect = async () => {
     const place = locationAutocompleteRef.current?.getPlace();
     if (place && place.geometry?.location) {
@@ -83,8 +84,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
 
           // Convert location to coordinates
           const coords = await convertLocationToCoordinates(city, state);
-          console.log('🔍 Location coordinates:', coords);
-          console.log('👩‍🎨 Designers found:', designers);
+
 
           if (coords && userCoords) {
             const distance = calculateDistance(
@@ -93,7 +93,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
               coords.lat,
               coords.lng
             );
-            console.log('📏 Distance:', distance);
+          }
+
+          if (coords) {
+            const newSearchParams = new URLSearchParams(window.location.search);
+            newSearchParams.set('lat', coords.lat.toString());
+            newSearchParams.set('lng', coords.lng.toString());
+            newSearchParams.set('location', place.formatted_address || '');
+            newSearchParams.set('zipCode', zipCode);
+
+            // Update the URL without reloading the page
+            window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams}`);
           }
 
           setLocation(place.formatted_address || '');
@@ -111,6 +121,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
       }
     }
   };
+
 
   const handleZipSelect = async () => {
     const place = zipAutocompleteRef.current?.getPlace();
@@ -139,8 +150,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
 
           // Convert location to coordinates
           const coords = await convertLocationToCoordinates(city, state);
-          console.log('🔍 ZIP location coordinates:', coords);
-          console.log('👩‍🎨 Designers found:', designers);
+
 
           if (coords && userCoords) {
             const distance = calculateDistance(
@@ -149,16 +159,28 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
               coords.lat,
               coords.lng
             );
-            console.log('📏 Distance:', distance);
           }
 
           const cityState = [city, stateComponent?.short_name].filter(Boolean).join(', ');
+
+          if (coords) {
+            const newSearchParams = new URLSearchParams(window.location.search);
+            newSearchParams.set('lat', coords.lat.toString());
+            newSearchParams.set('lng', coords.lng.toString());
+            newSearchParams.set('location', cityState);
+            newSearchParams.set('zipCode', postalCode);
+
+            // Update the URL without reloading the page
+            window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams}`);
+          }
+
+
           setLocation(cityState);
           setZipCode(postalCode);
 
           onSearch({
-            location: cityState,
-            zipCode: postalCode,
+            location: place.formatted_address || '',
+            zipCode,
             coordinates: coords || undefined
           });
         }
@@ -213,8 +235,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
                     state
                   });
 
-                  console.log('📍 Current location coords:', { lat: latitude, lng: longitude });
-                  console.log('👩‍🎨 Nearby designers:', designers);
+
 
                   if (userCoords) {
                     const distance = calculateDistance(
@@ -223,8 +244,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, init
                       latitude,
                       longitude
                     );
-                    console.log('📏 Distance:', distance);
                   }
+                  const newSearchParams = new URLSearchParams(window.location.search);
+                  newSearchParams.set('lat', latitude.toString());
+                  newSearchParams.set('lng', longitude.toString());
+                  newSearchParams.set('location', place.formatted_address || 'Current Location');
+                  newSearchParams.set('zipCode', postalCode);
+
+                  // Update the URL without reloading the page
+                  window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams}`);
 
                   setLocation(place.formatted_address || 'Current Location');
                   setZipCode(postalCode);

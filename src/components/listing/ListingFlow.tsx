@@ -52,7 +52,6 @@ export const ListingFlow: React.FC = () => {
       setError(null);
 
       const listingId = await createListing(formData);
-      console.log("Form Data:", formData);
 
 
       // Redirect to success page

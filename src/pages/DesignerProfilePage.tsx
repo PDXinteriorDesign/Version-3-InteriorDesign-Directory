@@ -17,7 +17,6 @@ export const DesignerProfilePage: React.FC = () => {
 
   useEffect(() => {
     const fetchDesigner = async () => {
-      console.log(`Fetching designer with ID: ${id}`); // Debugging line
 
       if (!id) {
         console.error('Invalid designer ID');
@@ -28,11 +27,9 @@ export const DesignerProfilePage: React.FC = () => {
 
       try {
         const docRef = doc(db, 'listings', id);
-        console.log("Fetching document from Firestore:", docRef.path); // Debugging line
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          console.log("Designer found:", docSnap.data()); // Debugging line
           setDesigner(docSnap.data());
         } else {
           console.error('Designer not found');
