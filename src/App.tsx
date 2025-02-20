@@ -11,6 +11,7 @@ const libraries: ("places")[] = ["places"];
 const App: React.FC = () => {
 
   return (
+
     <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={libraries}
       loadingElement={<></>}
     >
