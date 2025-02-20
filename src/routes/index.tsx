@@ -26,6 +26,7 @@ import { BudgetDesignPage } from '../pages/BudgetDesignPage';
 import { DesignTipsPage } from '../pages/DesignTipsPage';
 import { DIYProjectsPage } from '../pages/DIYProjectsPage';
 import { DesignBlogPage } from '../pages/DesignBlogPage';
+import SearchResultsPage from '../components/SearchResultsPage';
 
 export const AppRoutes = [
   { path: '/', element: <HomePage /> },
@@ -47,6 +48,7 @@ export const AppRoutes = [
   { path: '/designer/:id', element: <DesignerProfilePage /> },
   { path: '/designers/:state', element: <DesignersPage /> },
   { path: '/list-with-us/success', element: <SuccessPage /> },
+  { path: '/search', element: <SearchResultsPage /> },
   { path: '/find-designer', element: <FindDesignerPage /> },
   { path: '/design-styles', element: <DesignStylesPage /> },
   { path: '/project-gallery', element: <ProjectGalleryPage /> },

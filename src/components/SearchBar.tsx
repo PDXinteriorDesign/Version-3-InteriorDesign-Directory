@@ -28,16 +28,20 @@ interface SearchFilters {
 
 interface SearchBarProps {
   onSearch: (filters: SearchFilters) => void;
-  userCoords?: Coordinates;
+  userCoords?: { lat: number; lng: number };
+  initialLocation?: string;
+  initialZipCode?: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords }) => {
-  const [location, setLocation] = useState('');
-  const [zipCode, setZipCode] = useState('');
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, userCoords, initialLocation = '', initialZipCode = '' }: SearchBarProps) => {
+  const [location, setLocation] = useState(initialLocation || '');
+  const [zipCode, setZipCode] = useState(initialZipCode || '');
   const [loading, setLoading] = useState(false);
   const [geoError, setGeoError] = useState<string | null>(null);
   const locationAutocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const zipAutocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+
+
 
   const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371;
