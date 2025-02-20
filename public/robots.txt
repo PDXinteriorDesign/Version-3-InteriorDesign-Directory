@@ -1,4 +1,6 @@
 User-agent: *
+
+# Allow the specific URLs from your sitemap (list them all here)
 Allow: /
 
 Sitemap: https://thedesignrefuge.com/sitemap.xml
