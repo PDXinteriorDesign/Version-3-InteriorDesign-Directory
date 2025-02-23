@@ -1,4 +1,4 @@
-export const states = [
+export const statesList = [
     { name: "Alabama", slug: "alabama" },
     { name: "Alaska", slug: "alaska" },
     { name: "Arizona", slug: "arizona" },

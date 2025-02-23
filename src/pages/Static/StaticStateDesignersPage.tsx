@@ -1,22 +1,49 @@
-import React, { useState } from 'react';
-import { Navbar } from '../components/Navbar';
-import { SEOHead } from '../components/SEOHead';
-import { designers } from '../data/designers';
-import { DesignerCard } from '../components/DesignerCard';
-import { designerSchema } from '../utils/schema';
-import { useListings } from '../hooks/useListings';
+import React, { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import { Navbar } from '../../components/Navbar';
+import { SEOHead } from '../../components/SEOHead';
+import { designers } from '../../data/designers';
+import { DesignerCard } from '../../components/DesignerCard';
+import { designerSchema } from '../../utils/schema';
+import { useListings } from '../../hooks/useListings';
 import { Loader } from 'lucide-react';
-import { DesignerFilters } from '../components/DesignerFilters';
+import { DesignerFilters } from '../../components/DesignerFilters';
+import { statesList } from '../../data/states.mjs';
 
-export const DesignersPage: React.FC = () => {
-  const { listings, loading, error } = useListings({ status: 'approved' });
+
+export const StaticStateDesignersPage: React.FC = () => {
+  const { state } = useParams<{ state?: string }>();
+  const location = useLocation();
+  const isStatePage = Boolean(state);
+
+  const stateInfo = state ?
+    statesList.find(s => s.slug.toLowerCase() === state.toLowerCase()) :
+    null;
+
+
+  const { listings, loading, error } = useListings({
+    status: 'approved',
+    state: stateInfo?.name // Pass state name to filter listings
+  });
+
+
   const [filters, setFilters] = useState({
-    state: '',
+    state: stateInfo?.name || '',
     city: '',
     minRating: 4,
     styles: [] as string[],
     priceRange: ''
   });
+
+  useEffect(() => {
+    if (stateInfo) {
+      setFilters(prev => ({
+        ...prev,
+        state: stateInfo.name
+      }));
+    }
+  }, [stateInfo]);
+
 
   // Convert listings to designer format
   const listingDesigners = listings.map(listing => ({
@@ -100,27 +127,46 @@ export const DesignersPage: React.FC = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Interior Designers Directory",
-    "description": "Browse our curated selection of top interior designers and find the perfect match for your project.",
+    "name": stateInfo ?
+      `Interior Designers in ${stateInfo.name}` :
+      "Interior Designers Directory",
+    "description": stateInfo ?
+      `Find top-rated interior designers in ${stateInfo.name}. Browse portfolios and connect with local design professionals.` :
+      "Browse our curated selection of top interior designers and find the perfect match for your project.",
     "hasPart": filteredDesigners.map(designer => designerSchema(designer))
   };
+
 
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title="Browse Interior Designers | The Design Refuge"
-        description="Discover talented interior designers in your area. Browse portfolios, read reviews, and find the perfect designer for your project."
+        title={stateInfo ?
+          `Interior Designers in ${stateInfo.name} | The Design Refuge` :
+          "Browse Interior Designers | The Design Refuge"
+        }
+        description={stateInfo ?
+          `Discover talented interior designers in ${stateInfo.name}. Browse portfolios, read reviews, and find the perfect designer for your project.` :
+          "Discover talented interior designers in your area. Browse portfolios, read reviews, and find the perfect designer for your project."
+        }
         schema={schema}
-        canonicalUrl="/designers"
+        canonicalUrl={location.pathname}
       />
 
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif mb-4">Our Interior Designers</h1>
+          <h1 className="text-4xl md:text-5xl font-serif mb-4">
+            {stateInfo ?
+              `Interior Designers in ${stateInfo.name}` :
+              "Our Interior Designers"
+            }
+          </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Browse our curated selection of top interior designers and find the perfect match for your project
+            {stateInfo ?
+              `Browse our curated selection of top interior designers in ${stateInfo.name} and find the perfect match for your project` :
+              "Browse our curated selection of top interior designers and find the perfect match for your project"
+            }
           </p>
         </div>
 

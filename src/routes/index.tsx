@@ -1,9 +1,7 @@
-import React from 'react';
 import { HomePage } from '../pages/HomePage';
 import { AboutPage } from '../pages/AboutPage';
 import { ContactPage } from '../pages/ContactPage';
 import { DesignerResourcesPage } from '../pages/DesignerResourcesPage';
-import { DesignersStatePage } from '../pages/locations/DesignersStatePage';
 import { DesignersCityPage } from '../pages/locations/DesignersCityPage';
 import { DesignerProfilePage } from '../pages/DesignerProfilePage';
 import { ComingSoonPage } from '../pages/ComingSoonPage';
@@ -26,6 +24,7 @@ import { BudgetDesignPage } from '../pages/BudgetDesignPage';
 import { DesignTipsPage } from '../pages/DesignTipsPage';
 import { DIYProjectsPage } from '../pages/DIYProjectsPage';
 import { DesignBlogPage } from '../pages/DesignBlogPage';
+import { StaticStateDesignersPage } from '../pages/Static/StaticStateDesignersPage'
 import SearchResultsPage from '../components/SearchResultsPage';
 
 export const AppRoutes = [
@@ -46,7 +45,7 @@ export const AppRoutes = [
   { path: '/list-with-us', element: <ListBusinessPage /> },
   { path: '/designers', element: <DesignersPage /> },
   { path: '/designer/:id', element: <DesignerProfilePage /> },
-  { path: '/designers/:state', element: <DesignersPage /> },
+  { path: '/designers/:state', element: <StaticStateDesignersPage /> },
   { path: '/list-with-us/success', element: <SuccessPage /> },
   { path: '/search', element: <SearchResultsPage /> },
   { path: '/find-designer', element: <FindDesignerPage /> },
@@ -57,5 +56,6 @@ export const AppRoutes = [
   { path: '/resources/diy', element: <DIYProjectsPage /> },
   { path: '/resources/blog', element: <DesignBlogPage /> },
   { path: '/designers/:state/:city', element: <DesignersCityPage /> },
+
 
 ];

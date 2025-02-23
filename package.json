@@ -5,13 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build && node src/pages/Static/scripts/generate-sitemap.mjs",
+    "generate-sitemap": "ts-node scripts/generate-sitemap.ts",
+    "verify-static": "node scripts/verify-static.js",
+    "build:analyze": "vite build --mode production --debug",
+    "clean": "rimraf dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.6",
     "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
     "firebase": "^11.3.1",
     "geofirestore": "^5.2.0",
     "jspdf": "^2.5.1",
@@ -32,9 +37,13 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "postcss": "^8.4.35",
+    "rimraf": "^5.0.1",
     "tailwindcss": "^3.4.1",
+    "terser": "^5.26.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",
-    "vite": "^5.4.2"
+    "vite": "^5.4.2",
+    "vite-plugin-compression2": "^0.11.0"
   }
 }

@@ -6,6 +6,8 @@ import { ListingData } from '../types/listing';
 interface UseListingsProps {
   status?: string;
   location?: string;
+  state?: string;
+
 }
 
 export const useListings = ({ status = undefined, location }: UseListingsProps = {}) => {
