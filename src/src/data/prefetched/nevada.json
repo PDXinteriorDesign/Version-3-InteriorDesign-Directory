@@ -1,0 +1,45 @@
+[
+  {
+    "id": "BPXVtdJRbDm6byDgatLT",
+    "businessLocation": {
+      "state": "Nevada",
+      "city": "Reno"
+    },
+    "status": "approved",
+    "portfolio": {
+      "description": "Test upload",
+      "style": [
+        "Minimalist",
+        "Farmhouse",
+        "Eclectic",
+        "Traditional",
+        "Contemporary",
+        "Modern"
+      ],
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739828210551-pexels-vlada-karpovich-7365314.jpg?alt=media&token=a278eca8-d967-437f-a509-6709ef848f34"
+      ]
+    },
+    "createdAt": "2025-02-17T21:37:08.103Z",
+    "services": {
+      "priceRange": "",
+      "areas": [
+        "Residential"
+      ],
+      "offerings": [
+        "Full Room Design",
+        "Commercial Design",
+        "Lighting Design"
+      ]
+    },
+    "updatedAt": "2025-02-17T21:37:08.103Z",
+    "businessInfo": {
+      "company": "Center Stage and Design LLC, Reno/Sparks",
+      "phone": "(775) 234-2175",
+      "email": "contact@centerstageanddesign.com",
+      "website": "https://www.centerstageanddesign.com/",
+      "experience": "15",
+      "name": "kenny carson"
+    }
+  }
+]

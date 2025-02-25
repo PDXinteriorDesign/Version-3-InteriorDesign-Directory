@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { statesList } = require('../src/utils/states');
+const { statesList } = require('../src/data/states.ts');
+
 
 function verifyStaticBuild() {
   const distPath = path.join(__dirname, '../dist');

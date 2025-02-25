@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 const BASE_URL = 'https://www.thedesignrefuge.com';
 const today = new Date().toISOString().split('T')[0];
 
-import { statesList } from '../../../data/states.mjs';  
+import { statesList } from '../../../data/states.js';  
 
 // Define static routes
 const staticRoutes = [

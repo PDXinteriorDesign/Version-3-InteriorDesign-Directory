@@ -1,0 +1,93 @@
+[
+  {
+    "id": "FHpUjk1673kcDveJBEUp",
+    "services": {
+      "areas": [
+        "Residential"
+      ],
+      "offerings": [
+        "Art & Accessories Selection",
+        "Lighting Design",
+        "Commercial Design",
+        "Home Staging"
+      ],
+      "priceRange": "$$"
+    },
+    "createdAt": "2025-02-17T21:26:41.394Z",
+    "status": "approved",
+    "portfolio": {
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739827577977-pexels-jonathanborba-3255244.jpg?alt=media&token=4e658c3e-b787-46a8-a8d7-1dd365cf131d"
+      ],
+      "description": "place hoder",
+      "style": [
+        "Minimalist",
+        "Farmhouse",
+        "Bohemian",
+        "Mid-Century Modern",
+        "Traditional",
+        "Contemporary"
+      ]
+    },
+    "updatedAt": "2025-02-17T21:26:41.394Z",
+    "businessLocation": {
+      "city": "Mesa",
+      "state": "Arizona"
+    },
+    "businessInfo": {
+      "phone": "(651) 274-6524",
+      "experience": "7",
+      "email": "Tasha@TchotchkesDesignStudio.com",
+      "website": "https://www.tchotchkesdesignstudio.com",
+      "name": "Tasha",
+      "company": "Tchotchkes Design Studio"
+    }
+  },
+  {
+    "id": "pZbpW9kcAdbALTbrlz3W",
+    "createdAt": "2025-02-17T21:10:06.771Z",
+    "updatedAt": "2025-02-17T21:10:06.771Z",
+    "services": {
+      "areas": [
+        "Retail",
+        "Office",
+        "Hospitality",
+        "Residential"
+      ],
+      "offerings": [
+        "Full Room Design",
+        "Space Planning",
+        "Virtual Design Services",
+        "Custom Furniture Design",
+        "Art & Accessories Selection"
+      ],
+      "priceRange": "$$$"
+    },
+    "portfolio": {
+      "style": [
+        "Contemporary",
+        "Minimalist",
+        "Industrial",
+        "Mid-Century Modern",
+        "Eclectic"
+      ],
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739826587900-pexels-curtis-adams-1694007-11593472.jpg?alt=media&token=fb7836fa-b5b3-4b63-8f6f-e31803db6e5f"
+      ],
+      "description": "For over a decade, Mackenzie Collier Interiors has gained recognition for our innovative and visionary approach to design, driving the industry towards greater creativity, inclusivity, and sustainability. At MCI, we customize our interior design services to meet your specific requirements, creating spaces that are both relevant and long-lasting, regardless of the project scale.\n\nWith a team composed of individuals hailing from various corners of the globe, the MCI staff brings together a wealth of diverse backgrounds and perspectives, resulting in captivating and distinctly unconventional designs. Our design endeavors encompass a wide range of settings, including private homes, multi-family buildings, office spaces, restaurants, retail establishments, and wellness facilities. We particularly excel in projects involving mixed-use and repurposed spaces. Our team possesses the necessary resources, flexibility, and expertise to undertake projects not only in Arizona but across North America."
+    },
+    "status": "approved",
+    "businessInfo": {
+      "email": "heythere@mackenziecollierinteriors.com",
+      "experience": "10",
+      "phone": "(602) 529-2191",
+      "website": "https://www.mackenziecollierinteriors.com/",
+      "company": "Mackenzie Collier Interiors",
+      "name": "Mackenzie Collier"
+    },
+    "businessLocation": {
+      "state": "Arizona",
+      "city": "Phoenix"
+    }
+  }
+]

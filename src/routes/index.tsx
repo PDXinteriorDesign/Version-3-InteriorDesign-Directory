@@ -24,7 +24,6 @@ import { BudgetDesignPage } from '../pages/BudgetDesignPage';
 import { DesignTipsPage } from '../pages/DesignTipsPage';
 import { DIYProjectsPage } from '../pages/DIYProjectsPage';
 import { DesignBlogPage } from '../pages/DesignBlogPage';
-import { StaticStateDesignersPage } from '../pages/Static/StaticStateDesignersPage'
 import SearchResultsPage from '../components/SearchResultsPage';
 
 export const AppRoutes = [
@@ -45,7 +44,7 @@ export const AppRoutes = [
   { path: '/list-with-us', element: <ListBusinessPage /> },
   { path: '/designers', element: <DesignersPage /> },
   { path: '/designer/:id', element: <DesignerProfilePage /> },
-  { path: '/designers/:state', element: <StaticStateDesignersPage /> },
+  { path: '/designers/:state', element: <DesignersPage /> },
   { path: '/list-with-us/success', element: <SuccessPage /> },
   { path: '/search', element: <SearchResultsPage /> },
   { path: '/find-designer', element: <FindDesignerPage /> },

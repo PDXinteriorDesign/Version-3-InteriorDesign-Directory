@@ -5,13 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node src/pages/Static/scripts/generate-sitemap.mjs",
-    "generate-sitemap": "ts-node scripts/generate-sitemap.ts",
-    "verify-static": "node scripts/verify-static.js",
-    "build:analyze": "vite build --mode production --debug",
     "clean": "rimraf dist",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build": "tsc && vite build",
+    "generate-static": "node src/pages/Static/scripts/generate-static-site.mjs",
+    "verify-static": "node src/pages/Static/scripts/verify-static.js",
+    "build:analyze": "vite build --mode production --debug",
+    "prefetch": "node src/pages/Static/scripts/prefetchFirebaseData.mjs",
+    "build:with-prefetch": "npm run prefetch && npm run build",
+    "build:static": "npm run clean && npm run prefetch && npm run build && npm run generate-static"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.6",
@@ -19,6 +22,7 @@
     "date-fns": "^4.1.0",
     "firebase": "^11.3.1",
     "geofirestore": "^5.2.0",
+    "jsdom": "^26.0.0",
     "jspdf": "^2.5.1",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
@@ -37,6 +41,7 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "postcss": "^8.4.35",
+    "react-snap": "^1.23.0",
     "rimraf": "^5.0.1",
     "tailwindcss": "^3.4.1",
     "terser": "^5.26.0",

@@ -1,0 +1,134 @@
+[
+  {
+    "id": "AvQSvellp58ELY8mAMjw",
+    "businessLocation": {
+      "state": "California",
+      "city": "Los Angeles"
+    },
+    "status": "approved",
+    "updatedAt": "2025-02-11T11:40:47.459Z",
+    "services": {
+      "offerings": [
+        "Furniture Selection"
+      ],
+      "priceRange": "$$$",
+      "areas": [
+        "Hospitality"
+      ]
+    },
+    "portfolio": {
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739273991858-person.jfif?alt=media&token=1a47e8fd-3322-4dd2-9b31-a1ea3c10d71a",
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739274011063-h2.jpg?alt=media&token=068fa8e8-a0cf-4aed-b2ab-c41d3df2d4c8"
+      ],
+      "description": "testing testing",
+      "style": [
+        "Modern",
+        "Minimalist",
+        "Farmhouse"
+      ]
+    },
+    "businessInfo": {
+      "email": "john.doe2@example.com",
+      "website": "http://doe.com",
+      "experience": "5",
+      "city": "",
+      "name": "John Doe",
+      "phone": "12345678",
+      "state": "",
+      "company": "Doe Designs"
+    },
+    "createdAt": "2025-02-11T11:40:47.459Z"
+  },
+  {
+    "id": "DPhp74mz74sYHWp56Arf",
+    "status": "approved",
+    "portfolio": {
+      "style": [
+        "Modern",
+        "Industrial",
+        "Mid-Century Modern",
+        "Farmhouse",
+        "Scandinavian"
+      ],
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739826376821-pexels-charlotte-may-5825542.jpg?alt=media&token=19bd60bf-6627-41c3-bc21-e9f65277a94a"
+      ],
+      "description": "gibberish as this is a place holder."
+    },
+    "businessLocation": {
+      "state": "California",
+      "city": "San Diego"
+    },
+    "updatedAt": "2025-02-17T21:06:37.588Z",
+    "services": {
+      "areas": [
+        "Residential",
+        "Hospitality",
+        "Office"
+      ],
+      "offerings": [
+        "Full Room Design",
+        "Kitchen & Bath Design",
+        "Commercial Design",
+        "Space Planning",
+        "Home Staging",
+        "Furniture Selection"
+      ],
+      "priceRange": "$$$$"
+    },
+    "createdAt": "2025-02-17T21:06:37.588Z",
+    "businessInfo": {
+      "phone": "619.230.5343",
+      "experience": "10",
+      "email": "nicetomeetyou@studioh-int.com",
+      "website": "https://www.studioh-int.com/",
+      "company": "Studio H Design Group",
+      "name": "Kelly Hinchman"
+    }
+  },
+  {
+    "id": "hxrx7TdwoPVuVbxSDdiz",
+    "createdAt": "2025-02-17T21:17:06.508Z",
+    "businessInfo": {
+      "email": "hello@nozdesign.com",
+      "company": "https://nozdesign.com/",
+      "phone": "",
+      "website": "https://nozdesign.com/",
+      "experience": "8",
+      "name": "nozeol"
+    },
+    "portfolio": {
+      "style": [
+        "Modern",
+        "Minimalist",
+        "Bohemian",
+        "Coastal",
+        "Traditional"
+      ],
+      "description": "Noz Design provides a full range of interior design services for residential and select commercial projects in the San Francisco Bay Area, Lake Tahoe, New York City, and beyond. Our approach centers on really listening to and understanding each client's functional goals and vision for Home – how do you want each space to feel, how do you want your guests to move through spaces in your home, how can we incorporate sentimentality and your story with care, and how primary should our focus be on creating an aesthetic statement? At the end of a completed project, we want our clients to see themselves in their spaces – and to be thrilled that we were able to see them, translate their vision into spaces that work, and take great care in bringing it all to life.\n\nWe believe that transparency and thoughtful communication build trust and lead to the best project successes and longterm relationships. To that end, we love to help educate potential and current clients! While every project’s circumstances are unique, we do our best to help share what information we can.",
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739827009260-pexels-laura-tancredi-7078716.jpg?alt=media&token=841fc3c3-de74-4910-baef-9af9ade969a0"
+      ]
+    },
+    "services": {
+      "priceRange": "$$$$",
+      "areas": [
+        "Residential"
+      ],
+      "offerings": [
+        "Full Room Design",
+        "Kitchen & Bath Design",
+        "Home Staging",
+        "Color Consultation",
+        "Space Planning"
+      ]
+    },
+    "status": "approved",
+    "businessLocation": {
+      "city": "San Francisco ",
+      "state": "California"
+    },
+    "updatedAt": "2025-02-17T21:17:06.508Z"
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "HGKPGoZvwzJ2BfaIB6fH",
+    "businessLocation": {
+      "city": "Eugene",
+      "state": "Oregon"
+    },
+    "services": {
+      "offerings": [
+        "Full Room Design",
+        "Color Consultation",
+        "Space Planning",
+        "Kitchen & Bath Design",
+        "Home Staging",
+        "Lighting Design"
+      ],
+      "areas": [
+        "Residential"
+      ],
+      "priceRange": "$$"
+    },
+    "portfolio": {
+      "description": "​Here at the studio of SE DESIGN, we focus on designing homes people love being in and escaping to, homes that embrace a sense of our client's history, lifestyle and sense of adventure. Homes that are comfortably sophisticated, rich and relaxed. We create a living experience that's as beautiful as it is functional. \n\nWe take a friendly but highly organized approach to each client’s project.  Great communication and project management keep our clients in the know each step of the way, without making them feel overwhelmed.  Our client roster is comprised predominately of return business and client referrals, which is a strong testament to both our creative talent and work ethic.  Most clients return for their next projects: new residences, vacation homes or just design refreshes.  From selecting finishes and flooring to designing furniture to managing trades; for residential or commercial projects. While rooted in Oregon, we go anywhere we are needed. Whatever and wherever your design needs may be, our ultimate goal is to provide exceptional service to each client and deliver them their dream home.  We truly love what we do and want all clients to feel nothing less than thrilled with their experience.​",
+      "style": [
+        "Modern",
+        "Contemporary",
+        "Minimalist",
+        "Traditional",
+        "Coastal",
+        "Bohemian",
+        "Farmhouse"
+      ],
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739825863107-SarahAmbrose-picture.png?alt=media&token=01116594-8fcc-4d1c-b818-93ee4e985ede"
+      ]
+    },
+    "createdAt": "2025-02-17T20:58:32.911Z",
+    "businessInfo": {
+      "website": "https://sarahelizabeth.design/index.html",
+      "company": "Sarah Elizabeth Design",
+      "name": "Sarah Elizabeth",
+      "phone": "5416324414",
+      "experience": "14",
+      "email": "info@sarahelizabeth.design"
+    },
+    "updatedAt": "2025-02-17T20:58:32.911Z",
+    "status": "approved"
+  },
+  {
+    "id": "Nk7GWHQPQhV8FNm7gLhf",
+    "updatedAt": "2025-02-17T20:52:44.072Z",
+    "services": {
+      "areas": [
+        "Residential",
+        "Commercial",
+        "Hospitality"
+      ],
+      "priceRange": "$$$",
+      "offerings": [
+        "Full Room Design",
+        "Kitchen & Bath Design",
+        "Commercial Design",
+        "Space Planning",
+        "Furniture Selection"
+      ]
+    },
+    "createdAt": "2025-02-17T20:52:44.072Z",
+    "businessLocation": {
+      "city": "Portland",
+      "state": "Oregon"
+    },
+    "businessInfo": {
+      "company": "Studio Garrison",
+      "experience": "20",
+      "name": "Ashley Garner",
+      "phone": "(971) 255-0326",
+      "email": "admin@studiogarrison.com",
+      "website": "https://www.studiogarrison.com/"
+    },
+    "status": "approved",
+    "portfolio": {
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739825535858-Garrison%2BHullinger%2B2x3.jpg?alt=media&token=ca3c1c0e-b4cb-4dd5-ae7a-f4cac0a9e158"
+      ],
+      "style": [
+        "Modern",
+        "Transitional",
+        "Contemporary",
+        "Minimalist",
+        "Industrial",
+        "Mid-Century Modern"
+      ],
+      "description": "Studio Garrison is one of the best interior design firms in Portland. We specialize in residential design, hospitality design, commercial design, and even custom homes. Always professional, Studio Garrison pays attention to every detail of your space so you can enjoy a luxurious experience that combines form and function. We strive to make every space timeless and elegant, whether it’s a single room or an entire structure."
+    }
+  },
+  {
+    "id": "VZzSeoAHpnfdwBdQfMR2",
+    "businessLocation": {
+      "state": "Oregon",
+      "city": "Bend"
+    },
+    "status": "approved",
+    "services": {
+      "offerings": [
+        "Full Room Design",
+        "Furniture Selection",
+        "Custom Furniture Design",
+        "Lighting Design",
+        "Art & Accessories Selection"
+      ],
+      "priceRange": "$$",
+      "areas": [
+        "Residential"
+      ]
+    },
+    "updatedAt": "2025-02-17T21:12:47.239Z",
+    "createdAt": "2025-02-17T21:12:47.239Z",
+    "portfolio": {
+      "description": "Your space matters. A home is more than just a place to exist— it’s a place to evolve and share with friends and family, a place to relax, and an extension of your personality. It’s a place to make and share memories. From blueprints to remodels, we’re experts at aligning your unique functional needs with creative, cohesive design that makes your space unique and personal.",
+      "style": [
+        "Modern",
+        "Contemporary",
+        "Bohemian",
+        "Farmhouse",
+        "Eclectic"
+      ],
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739826751181-pexels-curtis-adams-1694007-10827345.jpg?alt=media&token=ed4066e2-9c17-447e-8900-2cf013644733"
+      ]
+    },
+    "businessInfo": {
+      "experience": "7",
+      "website": "https://societywest.design/",
+      "phone": "(541) 633-5313",
+      "company": "Society West Design",
+      "email": "placeholder@gmail.com",
+      "name": "john snow"
+    }
+  }
+]

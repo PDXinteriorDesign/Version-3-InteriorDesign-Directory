@@ -1,0 +1,81 @@
+[
+  {
+    "id": "NfzD2jOqC2H7GHBa9cyr",
+    "updatedAt": "2025-02-17T21:34:33.697Z",
+    "portfolio": {
+      "style": [
+        "Contemporary",
+        "Modern",
+        "Transitional",
+        "Scandinavian",
+        "Coastal"
+      ],
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739828050726-pexels-tuherdias-awang-20922123-16202240.jpg?alt=media&token=361e90ac-c400-40c0-a049-d7e46eff7e75"
+      ],
+      "description": "A Pacific Northwest native, Harmony was born and raised in Corvallis, OR. She moved to Seattle to study fashion design, and after over a decade of designing + developing technical apparel, she started designHARMONY in 2006. Harmony transitioned into interior design as a way to be more connected to the end user of her designs."
+    },
+    "businessLocation": {
+      "state": "Washington",
+      "city": "Kirkland"
+    },
+    "services": {
+      "areas": [
+        "Residential",
+        "Healthcare"
+      ],
+      "offerings": [
+        "Kitchen & Bath Design",
+        "Full Room Design",
+        "Window Treatments"
+      ],
+      "priceRange": "$$"
+    },
+    "status": "approved",
+    "businessInfo": {
+      "email": "designharmonyintro@gmail.com",
+      "phone": "(206) 245-4880",
+      "experience": "15",
+      "company": "designHARMONY",
+      "name": "Harmony",
+      "website": "https://designharmonyinfo.com/"
+    },
+    "createdAt": "2025-02-17T21:34:33.697Z"
+  },
+  {
+    "id": "zcsKkLjh2KRIsqDVFhw2",
+    "portfolio": {
+      "images": [
+        "https://firebasestorage.googleapis.com/v0/b/interiordesigndirectory-515f6.firebasestorage.app/o/portfolio%2F1739827772327-pexels-karolina-grabowska-4977402.jpg?alt=media&token=d02b07d7-3539-4bed-ba66-4ac1f1eaecf2"
+      ],
+      "style": [
+        "Scandinavian",
+        "Bohemian",
+        "Contemporary",
+        "Traditional",
+        "Coastal"
+      ],
+      "description": "Becky's love for designing homes started early in life. Raised by interior designers, Becky witnessed the art of transforming ordinary spaces into beautiful, functional homes first hand. After completing her degree from the Kelley School of Business, Becky purchased her first home and started learning a variety of trades. Her extensive background in interior design coupled with a strong background in business allowed to Becky to launch The Phinery in 2016. Surrounding herself with an incredibly talented and creative team has been a dream, resulting in a bustling design studio that is incredibly hardworking, highly experienced, and feels like family.\n\n"
+    },
+    "businessInfo": {
+      "phone": "(206) 789-6512",
+      "experience": "9",
+      "name": "BECKY DUCSIK",
+      "website": "https://www.thephinery.com/",
+      "email": "hello@thephinery.com",
+      "company": "The Phinery Interior Design Studio & Home Store"
+    },
+    "status": "approved",
+    "updatedAt": "2025-02-17T21:29:49.235Z",
+    "createdAt": "2025-02-17T21:29:49.235Z",
+    "services": {
+      "areas": [],
+      "offerings": [],
+      "priceRange": ""
+    },
+    "businessLocation": {
+      "state": "Washington",
+      "city": "Seattle"
+    }
+  }
+]
