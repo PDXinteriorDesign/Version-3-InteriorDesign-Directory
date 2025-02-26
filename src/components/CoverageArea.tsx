@@ -72,7 +72,7 @@ export const CoverageArea: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="flex items-center justify-center p-6 bg-gradient-to-br from-sage-50 to-sage-100/50 rounded-xl">
               <Users className="w-6 h-6 text-sage-600 mr-3" />
-              <span className="text-gray-800 font-medium">500+ Designers</span>
+              <span className="text-gray-800 font-medium">200+ Designers</span>
             </div>
             <div className="flex items-center justify-center p-6 bg-gradient-to-br from-coral-50 to-coral-100/50 rounded-xl">
               <Building className="w-6 h-6 text-coral-500 mr-3" />
