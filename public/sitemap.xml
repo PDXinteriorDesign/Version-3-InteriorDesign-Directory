@@ -2,321 +2,156 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-      <loc>https://www.thedesignrefuge.com/</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>1.0</priority>
+        <loc>https://www.thedesignrefuge.com/</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/about</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
+        <loc>https://www.thedesignrefuge.com/about</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/contact</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
+        <loc>https://www.thedesignrefuge.com/contact</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/alabama</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/designers</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/alaska</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/designers/california</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/arizona</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/designers/oregon</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/arkansas</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/designers/washington</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/california</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/designers/nevada</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/colorado</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/designers/arizona</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/connecticut</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/design-styles</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/delaware</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/tips</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/florida</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/budget-design</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/georgia</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/diy</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/hawaii</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/list-with-us</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/idaho</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/for-designers</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/illinois</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/templates</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/indiana</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/guides</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/iowa</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/guides/bohemian-chic</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/kansas</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/guides/industrial-style</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/kentucky</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/guides/mid-century-modern</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/louisiana</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/profit-calculator</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
+
     <url>
-      <loc>https://www.thedesignrefuge.com/designers/maine</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/maryland</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/massachusetts</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/michigan</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/minnesota</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/mississippi</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/missouri</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/montana</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/nebraska</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/nevada</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/new-hampshire</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/new-jersey</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/new-mexico</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/new-york</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/north-carolina</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/north-dakota</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/ohio</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/oklahoma</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/oregon</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/pennsylvania</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/rhode-island</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/south-carolina</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/south-dakota</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/tennessee</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/texas</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/utah</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/vermont</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/virginia</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/washington</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/west-virginia</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/wisconsin</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://www.thedesignrefuge.com/designers/wyoming</loc>
-      <lastmod>2025-02-25</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
+        <loc>https://www.thedesignrefuge.com/resources/growth-strategies</loc>
+        <lastmod>2025-02-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
 </urlset>
